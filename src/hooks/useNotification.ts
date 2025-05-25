@@ -5,13 +5,12 @@ import {
 } from "../context/NotificationContext"
 
 export const useNotification = (): INotificationContext => {
-  const context = useContext(NotificationContext)
+  const context: INotificationContext | null = useContext(NotificationContext)
 
-  if (!context) {
+  if (!context)
     throw new Error(
       "useNotification must be used within a NotificationProvider"
     )
-  }
 
   return context
 }

@@ -15,7 +15,11 @@ const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [api, contextHolder] = notification.useNotification()
 
-  const openNotification = useCallback(
+  const openNotification: ({
+    message,
+    description,
+    type,
+  }: INotificationMessage) => void = useCallback(
     ({ message, description, type }: INotificationMessage) => {
       api[type || "info"]({
         message,
