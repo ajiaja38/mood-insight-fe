@@ -30,7 +30,13 @@ const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
     [api]
   )
 
-  const value = useMemo(() => ({ openNotification }), [openNotification])
+  const value: {
+    openNotification: ({
+      message,
+      description,
+      type,
+    }: INotificationMessage) => void
+  } = useMemo(() => ({ openNotification }), [openNotification])
 
   return (
     <NotificationContext.Provider value={value}>
