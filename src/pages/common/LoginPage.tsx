@@ -1,6 +1,6 @@
-import React from "react"
+import React, { type JSX } from "react"
 
-const LoginPage: React.FC = () => {
+const LoginPage: React.FC = (): JSX.Element => {
   return <div>LoginPage</div>
 }
 
