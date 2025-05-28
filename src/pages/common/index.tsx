@@ -11,7 +11,7 @@ const LandingPage: React.FC = (): JSX.Element => {
       <Button
         icon={<RadiusUprightOutlined />}
         type="primary"
-        onClick={() =>
+        onClick={(): void =>
           openNotification({
             message: "Hello World",
             description: "This is a notification message",
