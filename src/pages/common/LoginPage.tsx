@@ -1,60 +1,78 @@
-import React, { type JSX } from "react"
+import React, { useEffect, useState, type JSX } from "react"
 import { Button, Form, Input } from "antd"
 import type { FormProps } from "antd"
-
-type FieldType = {
-  username?: string
-  password?: string
-}
-
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values)
-}
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo)
-}
+import { NavLink, useNavigate, type NavigateFunction } from "react-router-dom"
+import type { ILoginPayload } from "../../types/interface/IAuth.interface"
+import { useAuth } from "../../hooks/useAuth"
+import type { IAuthContext } from "../../context/auth/AuthContext"
+import LocalStorageService from "../../service/localStorage.service"
 
 const LoginPage: React.FC = (): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const auth: IAuthContext = useAuth()
+  const navigate: NavigateFunction = useNavigate()
+
+  const onFinish: FormProps<ILoginPayload>["onFinish"] = async (values) => {
+    setLoading(true)
+    setTimeout(async () => {
+      await auth.login(values)
+      navigate("/dashboard")
+      setLoading(false)
+    }, 1500)
+  }
+
+  useEffect(() => {
+    LocalStorageService.remove()
+  }, [])
+
   return (
-    <div className="h-screen bg-slate-200 flex flex-col justify-center items-center">
-      <div className="p-3 bg-white rounded-xl w-[30rem] shadow-xl px-7">
-        <h1 className="font-bold text-center text-xl">Silahkan Masuk</h1>
-        <Form
-          name="basic"
-          layout="vertical"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+    <>
+      <h1 className="font-bold text-center text-xl">Silahkan Masuk</h1>
+      <Form
+        name="basic"
+        layout="vertical"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        autoComplete="off"
+      >
+        <Form.Item<ILoginPayload>
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: "Tolong masukkan email anda!" },
+            { type: "email", message: "Email tidak valid!" },
+          ]}
         >
-          <Form.Item<FieldType>
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input />
-          </Form.Item>
+          <Input placeholder="Masukkan email anda" style={{ padding: 9 }} />
+        </Form.Item>
 
-          <Form.Item<FieldType>
-            label="Password"
-            name="password"
-            rules={[
-              { required: true, message: "Password wajib diisi!" },
-              { min: 6, message: "Password minimal 6 karakter!" },
-            ]}
-          >
-            <Input.Password placeholder="Password" />
-          </Form.Item>
+        <Form.Item<ILoginPayload>
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Password wajib diisi!" }]}
+        >
+          <Input.Password placeholder="Password" style={{ padding: 9 }} />
+        </Form.Item>
 
-          <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
-              Submit
+        <Form.Item>
+          <div className="flex flex-col gap-y-3">
+            <p>
+              Belum terdaftar?,
+              <NavLink to="/register"> Daftar disini</NavLink>
+            </p>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "5rem", padding: "1.2rem" }}
+              loading={loading}
+            >
+              {loading ? null : "Login"}
             </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </div>
+          </div>
+        </Form.Item>
+      </Form>
+    </>
   )
 }
 
