@@ -6,6 +6,14 @@ import AuthenticationLayout from "../layout/AuthenticationLayout"
 import RouterGuard from "./guard/RouterGuard"
 import DashboardHome from "../pages/private"
 import DashboardLayout from "../layout/DashboardLayout"
+import Disorder from "../pages/private/Disorder"
+import Users from "../pages/private/Users"
+import Symptom from "../pages/private/Symptom"
+import Consultation from "../pages/private/Consultation"
+import DiagnosisResult from "../pages/private/DiagnosisResult"
+import Solution from "../pages/private/Solution"
+import KnowledgeBase from "../pages/private/KnowledgeBase"
+import Profile from "../pages/private/Profile"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -38,6 +46,38 @@ export const router: ReturnType<typeof createBrowserRouter> =
             {
               path: "/dashboard",
               element: <DashboardHome />,
+            },
+            {
+              path: "/penyakit",
+              element: <Disorder />,
+            },
+            {
+              path: "/gejala",
+              element: <Symptom />,
+            },
+            {
+              path: "/konsultasi",
+              element: <Consultation />,
+            },
+            {
+              path: "/hasil-diagnosa",
+              element: <DiagnosisResult />,
+            },
+            {
+              path: "/solusi",
+              element: <Solution />,
+            },
+            {
+              path: "/knowledge-base",
+              element: <KnowledgeBase />,
+            },
+            {
+              path: "/users",
+              element: <Users />,
+            },
+            {
+              path: "/profile",
+              element: <Profile />,
             },
           ],
         },
