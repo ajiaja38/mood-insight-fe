@@ -5,6 +5,7 @@ import RegisterPage from "../pages/common/RegisterPage"
 import AuthenticationLayout from "../layout/AuthenticationLayout"
 import RouterGuard from "./guard/RouterGuard"
 import DashboardHome from "../pages/private"
+import DashboardLayout from "../layout/DashboardLayout"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -31,8 +32,14 @@ export const router: ReturnType<typeof createBrowserRouter> =
       element: <RouterGuard redirectPath="/login" />,
       children: [
         {
-          path: "/dashboard",
-          element: <DashboardHome />,
+          path: "",
+          element: <DashboardLayout />,
+          children: [
+            {
+              path: "/dashboard",
+              element: <DashboardHome />,
+            },
+          ],
         },
       ],
     },
