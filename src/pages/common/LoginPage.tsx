@@ -44,7 +44,7 @@ const LoginPage: React.FC = (): JSX.Element => {
             { type: "email", message: "Email tidak valid!" },
           ]}
         >
-          <Input placeholder="Masukkan email anda" style={{ padding: 9 }} />
+          <Input placeholder="Masukkan email anda" type="email" />
         </Form.Item>
 
         <Form.Item<ILoginPayload>
@@ -52,7 +52,7 @@ const LoginPage: React.FC = (): JSX.Element => {
           name="password"
           rules={[{ required: true, message: "Password wajib diisi!" }]}
         >
-          <Input.Password placeholder="Password" style={{ padding: 9 }} />
+          <Input.Password placeholder="Password" />
         </Form.Item>
 
         <Form.Item>

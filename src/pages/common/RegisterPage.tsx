@@ -1,16 +1,50 @@
 import React, { type JSX } from "react"
-import { Button, Form, Input, Select, type FormProps } from "antd"
-import { NavLink } from "react-router-dom"
+import { App, Button, Form, Input, Select, type FormProps } from "antd"
+import { NavLink, useNavigate, type NavigateFunction } from "react-router-dom"
 import { EGender } from "../../types/enum/EGender"
-import type { IRegisterPayload } from "../../types/interface/IAuth.interface"
-
-const onFinish: FormProps<IRegisterPayload>["onFinish"] = (values) => {
-  console.log("Success:", values)
-}
+import type {
+  IRegisterPayload,
+  IRegisterResponse,
+} from "../../types/interface/IAuth.interface"
+import { useMutation } from "@tanstack/react-query"
+import { UserService } from "../../service/user.service"
+import type { ResponseEntity } from "../../types/interface/IResponse.interface"
 
 const { Option } = Select
 
 const RegisterPage: React.FC = (): JSX.Element => {
+  const { notification } = App.useApp()
+  const navigate: NavigateFunction = useNavigate()
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: async (
+      data: IRegisterPayload
+    ): Promise<ResponseEntity<IRegisterResponse>> => {
+      const res: ResponseEntity<IRegisterResponse> =
+        await UserService.registerUser(data)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      return res
+    },
+    onSuccess: () => {
+      notification.success({
+        message: "Sukses",
+        description: "Pendaftaran berhasil, silahkan login!",
+      })
+      navigate("/login")
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: "Error",
+        description: error.response.data.message,
+      })
+    },
+  })
+
+  const onFinish: FormProps<IRegisterPayload>["onFinish"] = (values) => {
+    mutate(values)
+  }
+
   return (
     <>
       <h1 className="font-bold text-xl mb-5">Silahkan Mendaftar</h1>
@@ -106,8 +140,9 @@ const RegisterPage: React.FC = (): JSX.Element => {
               type="primary"
               htmlType="submit"
               style={{ width: "5rem", padding: "1.2rem" }}
+              loading={isPending}
             >
-              Daftar
+              {isPending ? null : "Daftar"}
             </Button>
           </div>
         </Form.Item>
