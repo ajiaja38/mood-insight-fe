@@ -52,6 +52,7 @@ const ContainerTable = <T,>({
         }}
         size="small"
         rowKey={(record) => (record as any).id}
+        bordered
       />
     </>
   )
