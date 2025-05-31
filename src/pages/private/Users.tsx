@@ -1,15 +1,7 @@
 import React, { useState, type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
-import {
-  App,
-  Button,
-  Popconfirm,
-  Table,
-  Tag,
-  Typography,
-  type TableProps,
-} from "antd"
+import { App, Button, Popconfirm, Tag, type TableProps } from "antd"
 import {
   QueryClient,
   useMutation,
@@ -22,8 +14,7 @@ import type { IGetAllUser } from "../../types/interface/IUser.interface"
 import { EGender } from "../../types/enum/EGender"
 import { ERole } from "../../types/enum/ERole"
 import type { ResponseMessageEntity } from "../../types/interface/IResponse.interface"
-
-const { Title } = Typography
+import ContainerTable from "../../components/Content/ContainerTable"
 
 interface DataTypes extends IGetAllUser {
   key: number
@@ -184,18 +175,10 @@ const Users: React.FC = (): JSX.Element => {
       <UseTitle title="Users" />
       <BreadCrumb items={[{ title: "Pengguna" }]} />
       <Container>
-        <Title level={3}>Daftar Pengguna</Title>
-        <Table<DataTypes>
+        <ContainerTable<DataTypes>
+          title="Daftar Pengguna"
           columns={columns}
-          dataSource={data}
-          showSorterTooltip={{ target: "sorter-icon" }}
-          pagination={{
-            pageSize: 5,
-            position: ["bottomRight"],
-            showTotal: (total, range) =>
-              `${range[0]}-${range[1]} dari ${total} pengguna`,
-          }}
-          size="small"
+          data={data}
         />
       </Container>
     </>

@@ -33,6 +33,8 @@ const DashboardLayout: React.FC = (): JSX.Element => {
             background: colorBgContainer,
             position: "sticky",
             top: 0,
+            zIndex: 9,
+            borderBottom: "1px solid #d9d9d9",
           }}
         >
           <Button

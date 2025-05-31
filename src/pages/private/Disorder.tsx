@@ -1,12 +1,277 @@
-import React, { type JSX } from "react"
+import React, { useState, type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
+import {
+  App,
+  Button,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  type FormProps,
+} from "antd"
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query"
+import { DisorderService } from "../../service/disorder.service"
+import type {
+  ResponseEntity,
+  ResponseMessageEntity,
+} from "../../types/interface/IResponse.interface"
+import type {
+  ICreateDisorder,
+  IGetDisorder,
+} from "../../types/interface/IDisorder.interface"
+import Container from "../../components/Content/Container"
+import ContainerTable from "../../components/Content/ContainerTable"
+import type { ColumnType } from "antd/es/table"
+import LoadingOverlay from "../../components/loading/LoadingOverlay"
 
 const Disorder: React.FC = (): JSX.Element => {
+  const [deletingDisorderId, setDeletingDisorderId] = useState<string | null>(
+    null
+  )
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [form] = Form.useForm<ICreateDisorder>()
+
+  const { notification } = App.useApp()
+  const queryClient: QueryClient = useQueryClient()
+
+  const { data, error } = useQuery({
+    queryKey: ["disorders"],
+    queryFn: () =>
+      DisorderService.getAllDisorder().then(
+        (res: ResponseEntity<IGetDisorder[]>) => res.data
+      ),
+  })
+
+  if (error) {
+    notification.error({
+      message: "Error",
+      description: error.message,
+    })
+  }
+
+  const { mutate: deleteDisorder } = useMutation({
+    mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
+      setDeletingDisorderId(id)
+      const res: ResponseMessageEntity = await DisorderService.deleteDisorder(
+        id
+      )
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      return res
+    },
+    onSuccess: () => {
+      notification.success({
+        message: "Success",
+        description: "Data Penyakit berhasil dihapus",
+      })
+      queryClient.invalidateQueries({ queryKey: ["disorders"] })
+    },
+    onError: (error) => {
+      notification.error({
+        message: "Error",
+        description: error.message,
+      })
+    },
+    onSettled: () => {
+      setDeletingDisorderId(null)
+    },
+  })
+
+  const handleOpenModal = () => setOpenModal(true)
+
+  const { mutate: createDisorder, isPending } = useMutation({
+    mutationKey: ["createDisorder"],
+    mutationFn: async (
+      data: ICreateDisorder
+    ): Promise<ResponseEntity<IGetDisorder>> => {
+      const res: ResponseEntity<IGetDisorder> =
+        await DisorderService.createDisorder(data)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      return res
+    },
+    onSuccess: () => {
+      notification.success({
+        message: "Success",
+        description: "Berhasil menambahkan penyakit",
+      })
+      setOpenModal(false)
+      queryClient.invalidateQueries({ queryKey: ["disorders"] })
+    },
+    onError: (error) => {
+      notification.error({
+        message: "Error",
+        description: error.message,
+      })
+    },
+    onSettled: () => {
+      setDeletingDisorderId(null)
+    },
+  })
+
+  const onSubmit: FormProps<ICreateDisorder>["onFinish"] = (values) => {
+    createDisorder(values)
+  }
+
+  const { mutate: updateDisorder, isPending: isUpdatePending } = useMutation({
+    mutationKey: ["updateDisorder"],
+    mutationFn: async (
+      data: IGetDisorder
+    ): Promise<ResponseEntity<IGetDisorder>> => {
+      const res: ResponseEntity<IGetDisorder> =
+        await DisorderService.updateDisorder(data.id, {
+          name: data.name,
+          description: data.description,
+        })
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      return res
+    },
+    onSuccess: (res: ResponseEntity<IGetDisorder>) => {
+      notification.success({
+        message: "Success",
+        description: `Berhasil memperbarui ${res.data.name}`,
+      })
+      setOpenModal(false)
+      queryClient.invalidateQueries({ queryKey: ["disorders"] })
+    },
+    onError: (error) => {
+      notification.error({
+        message: "Error",
+        description: error.message,
+      })
+    },
+    onSettled: () => {
+      setDeletingDisorderId(null)
+    },
+  })
+
+  const handleSave = (row: IGetDisorder) => {
+    updateDisorder(row)
+  }
+
+  const defaultColumns: (ColumnType<IGetDisorder> & { editable?: boolean })[] =
+    [
+      {
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
+        sorter: (a, b) => a.id.localeCompare(b.id),
+      },
+      {
+        title: "Nama Penyakit",
+        dataIndex: "name",
+        key: "name",
+        sorter: (a, b) => a.name.localeCompare(b.name),
+        ellipsis: {
+          showTitle: false,
+        },
+        editable: true,
+      },
+      {
+        title: "Deskripsi",
+        dataIndex: "description",
+        key: "description",
+        render: (_, { description }) => (
+          <p className="text-justify">{description}</p>
+        ),
+        editable: true,
+      },
+      {
+        title: "Aksi",
+        key: "action",
+        render: (_, record: IGetDisorder) => (
+          <Popconfirm
+            title="Hapus Data Penyakit?"
+            description={`Hapus data penyakit ${record.name}?`}
+            onConfirm={() => deleteDisorder(record.id)}
+            okText="Hapus"
+            cancelText="Batal"
+            okButtonProps={{ danger: true }}
+          >
+            <Button
+              color="red"
+              variant="solid"
+              loading={deletingDisorderId === record.id}
+            >
+              {deletingDisorderId === record.id ? null : "Hapus"}
+            </Button>
+          </Popconfirm>
+        ),
+      },
+    ]
+
+  const columns = defaultColumns.map((col) => {
+    if (!col.editable) return col
+    return {
+      ...col,
+      onCell: (record: IGetDisorder) =>
+        ({
+          record,
+          editable: true,
+          dataIndex: col.dataIndex as string,
+          title: col.title,
+          handleSave,
+        } as React.HTMLAttributes<HTMLElement>),
+    }
+  })
+
   return (
     <>
+      {isUpdatePending && <LoadingOverlay />}
       <UseTitle title="Penyakit" />
       <BreadCrumb items={[{ title: "Penyakit" }]} />
+      <Container>
+        <ContainerTable
+          title="Data Penyakit"
+          data={data}
+          columns={columns}
+          isAdd={true}
+          callback={handleOpenModal}
+        />
+      </Container>
+      <Modal
+        title="Tambah Data Penyakit"
+        open={openModal}
+        confirmLoading={isPending}
+        onOk={() => form.submit()}
+        closable={{ "aria-label": "Custom Close Button" }}
+        onCancel={() => setOpenModal(false)}
+      >
+        <Form
+          form={form}
+          name="add-disorder"
+          layout="vertical"
+          onFinish={onSubmit}
+          initialValues={{ remember: true }}
+        >
+          <Form.Item<ICreateDisorder>
+            label="Nama Penyakit"
+            name="name"
+            rules={[
+              { required: true, message: "Harap masukkan nama penyakit!" },
+            ]}
+          >
+            <Input placeholder="Masukkan nama penyakit" />
+          </Form.Item>
+
+          <Form.Item<ICreateDisorder>
+            label="Deskripsi"
+            name="description"
+            rules={[
+              { required: true, message: "Harap masukkan deskripsi penyakit!" },
+            ]}
+          >
+            <Input.TextArea
+              placeholder="Masukkan deskripsi penyakit"
+              rows={4}
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   )
 }
