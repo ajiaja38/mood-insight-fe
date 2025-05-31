@@ -1,5 +1,5 @@
-import type { EGender } from "../enum/EGender"
-import type { ERole } from "../enum/ERole"
+import type { EGender } from "../enum/EGender.enum"
+import type { ERole } from "../enum/ERole.enum"
 
 export interface IRegisterPayload {
   name: string

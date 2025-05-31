@@ -13,7 +13,7 @@ import type {
 } from "../../types/interface/IAuth.interface"
 import { UserService } from "../../service/user.service"
 import type { ResponseEntity } from "../../types/interface/IResponse.interface"
-import type { ERole } from "../../types/enum/ERole"
+import type { ERole } from "../../types/enum/ERole.enum"
 import { jwtDecode } from "jwt-decode"
 import type { IJwtPayload } from "../../types/interface/IJwtPayload.interface"
 import { AuthContext } from "./AuthContext"

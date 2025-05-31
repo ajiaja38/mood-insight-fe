@@ -55,6 +55,9 @@ const DashboardLayout: React.FC = (): JSX.Element => {
           }}
         >
           <Outlet />
+          <footer className="p-4 text-center">
+            Mood Insight &copy; {new Date().getFullYear()}
+          </footer>
         </Content>
       </Layout>
     </Layout>

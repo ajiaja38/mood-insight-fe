@@ -1,4 +1,4 @@
-import type { ERole } from "../enum/ERole"
+import type { ERole } from "../enum/ERole.enum"
 
 export interface IJwtPayload {
   id: string

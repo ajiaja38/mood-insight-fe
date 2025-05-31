@@ -11,8 +11,8 @@ import {
 import { UserService } from "../../service/user.service"
 import Container from "../../components/Content/Container"
 import type { IGetAllUser } from "../../types/interface/IUser.interface"
-import { EGender } from "../../types/enum/EGender"
-import { ERole } from "../../types/enum/ERole"
+import { EGender } from "../../types/enum/EGender.enum"
+import { ERole } from "../../types/enum/ERole.enum"
 import type { ResponseMessageEntity } from "../../types/interface/IResponse.interface"
 import ContainerTable from "../../components/Content/ContainerTable"
 

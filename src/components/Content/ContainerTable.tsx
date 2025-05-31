@@ -13,6 +13,7 @@ interface props<T> {
 }
 
 const { Title } = Typography
+
 const ContainerTable = <T,>({
   title,
   data,

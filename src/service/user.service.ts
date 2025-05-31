@@ -35,38 +35,22 @@ export class UserService {
   }
 
   public static async getAllUser(): Promise<ResponseEntity<IGetAllUser[]>> {
-    return api.get("user", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    return api.get("user")
   }
 
   public static async getDetailUser(
     id: string
   ): Promise<ResponseEntity<IDetailUser>> {
-    return api.get(`user/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    return api.get(`user/${id}`)
   }
 
   public static async updateUser(
     payload: IUpdateUserPayload
   ): Promise<ResponseEntity<IRegisterResponse>> {
-    return api.put(`user`, payload, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    return api.put(`user`, payload)
   }
 
   public static async deleteUser(id: string): Promise<ResponseMessageEntity> {
-    return api.delete(`user/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    return api.delete(`user/${id}`)
   }
 }

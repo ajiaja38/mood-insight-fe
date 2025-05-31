@@ -22,7 +22,7 @@ import {
 } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
 import type { IAuthContext } from "../../context/auth/AuthContext"
-import { ERole } from "../../types/enum/ERole"
+import { ERole } from "../../types/enum/ERole.enum"
 
 interface props {
   collapsed: boolean

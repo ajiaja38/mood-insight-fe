@@ -1,7 +1,7 @@
 import React, { type JSX } from "react"
 import { App, Button, Form, Input, Select, type FormProps } from "antd"
 import { NavLink, useNavigate, type NavigateFunction } from "react-router-dom"
-import { EGender } from "../../types/enum/EGender"
+import { EGender } from "../../types/enum/EGender.enum"
 import type {
   IRegisterPayload,
   IRegisterResponse,

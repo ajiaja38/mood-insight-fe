@@ -1,4 +1,4 @@
-import type { ERole } from "../../types/enum/ERole"
+import type { ERole } from "../../types/enum/ERole.enum"
 import type { ILoginPayload } from "../../types/interface/IAuth.interface"
 import { createContext, type Context } from "react"
 
