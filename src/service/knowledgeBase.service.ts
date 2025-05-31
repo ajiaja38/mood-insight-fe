@@ -13,7 +13,9 @@ export class KnowledgeBaseService {
   public static async createKnowledgeBase(
     data: ICreateKnowledgeBase
   ): Promise<ResponseEntity<IGetKnowledgeBase>> {
-    return api.post("knowledge-base", data)
+    return api.post("knowledge-base", {
+      details: [data],
+    })
   }
 
   public static async getAllKnowledgeBase(): Promise<
@@ -26,7 +28,12 @@ export class KnowledgeBaseService {
     id: string,
     data: IUpdateKnowledgeBase
   ): Promise<ResponseEntity<IGetKnowledgeBase>> {
-    return api.put(`knowledge-base/${id}`, data)
+    const stringWeight: string = data.weight.toString()
+    const weight: number = parseFloat(stringWeight)
+
+    return api.put(`knowledge-base/${id}`, {
+      weight,
+    })
   }
 
   public static async deleteKnowledgeBase(

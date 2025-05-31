@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react"
+import React, { type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
 import { App, Button, Popconfirm, Tag, type TableProps } from "antd"
@@ -15,13 +15,14 @@ import { EGender } from "../../types/enum/EGender.enum"
 import { ERole } from "../../types/enum/ERole.enum"
 import type { ResponseMessageEntity } from "../../types/interface/IResponse.interface"
 import ContainerTable from "../../components/Content/ContainerTable"
+import useTableAction from "../../hooks/useTableAction"
 
 interface DataTypes extends IGetAllUser {
   key: number
 }
 
 const Users: React.FC = (): JSX.Element => {
-  const [deletingUserId, setDeletingUserId] = useState<string | null>(null)
+  const { deletedId, setDeletedId } = useTableAction()
 
   const { notification } = App.useApp()
   const queryClient: QueryClient = useQueryClient()
@@ -45,7 +46,7 @@ const Users: React.FC = (): JSX.Element => {
 
   const { mutate: deleteUser } = useMutation({
     mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
-      setDeletingUserId(id)
+      setDeletedId(id)
       const res: ResponseMessageEntity = await UserService.deleteUser(id)
       await new Promise((resolve) => setTimeout(resolve, 2000))
       return res
@@ -64,7 +65,7 @@ const Users: React.FC = (): JSX.Element => {
       })
     },
     onSettled: () => {
-      setDeletingUserId(null)
+      setDeletedId(null)
     },
   })
 
@@ -161,9 +162,9 @@ const Users: React.FC = (): JSX.Element => {
             <Button
               color="red"
               variant="solid"
-              loading={deletingUserId === record.id}
+              loading={deletedId === record.id}
             >
-              {deletingUserId === record.id ? null : "Hapus"}
+              {deletedId === record.id ? null : "Hapus"}
             </Button>
           </Popconfirm>
         ) : null,

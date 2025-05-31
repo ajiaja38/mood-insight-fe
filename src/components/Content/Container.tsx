@@ -17,7 +17,7 @@ const Container: React.FC<{ children: React.ReactNode }> = ({
         borderRadius: borderRadiusLG,
         maxWidth: "100%",
         overflow: "auto",
-        // border: "1px solid #d9d9d9",
+        border: "1px solid #d9d9d9",
       }}
     >
       {children}

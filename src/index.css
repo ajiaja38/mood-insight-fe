@@ -5,4 +5,12 @@
 @theme {
   --font-varela: "Varela Round", sans-serif;
   --font-poppins: "Poppins", sans-serif;
+
+  /* Color */
+  --color-primary: #28cc9e;
+  --color-secondary: #0d4c92;
+  --color-tertiary: #122d42;
+  --color-quaternary: #95efce;
+  --color-quinary: #152744;
+  --color-senary: #2ea1d9;
 }

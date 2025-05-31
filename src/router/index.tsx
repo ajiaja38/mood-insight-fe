@@ -14,6 +14,7 @@ import DiagnosisResult from "../pages/private/DiagnosisResult"
 import Solution from "../pages/private/Solution"
 import KnowledgeBase from "../pages/private/KnowledgeBase"
 import Profile from "../pages/private/Profile"
+import Dashboard404 from "../pages/private/error"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -78,6 +79,10 @@ export const router: ReturnType<typeof createBrowserRouter> =
             {
               path: "/profile",
               element: <Profile />,
+            },
+            {
+              path: "*",
+              element: <Dashboard404 />,
             },
           ],
         },

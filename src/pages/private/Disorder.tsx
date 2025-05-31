@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react"
+import React, { type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
 import {
@@ -29,12 +29,11 @@ import Container from "../../components/Content/Container"
 import ContainerTable from "../../components/Content/ContainerTable"
 import type { ColumnType } from "antd/es/table"
 import LoadingOverlay from "../../components/loading/LoadingOverlay"
+import useTableAction from "../../hooks/useTableAction"
 
 const Disorder: React.FC = (): JSX.Element => {
-  const [deletingDisorderId, setDeletingDisorderId] = useState<string | null>(
-    null
-  )
-  const [openModal, setOpenModal] = useState<boolean>(false)
+  const { deletedId, setDeletedId, openModal, setOpenModal } = useTableAction()
+
   const [form] = Form.useForm<ICreateDisorder>()
 
   const { notification } = App.useApp()
@@ -57,7 +56,7 @@ const Disorder: React.FC = (): JSX.Element => {
 
   const { mutate: deleteDisorder } = useMutation({
     mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
-      setDeletingDisorderId(id)
+      setDeletedId(id)
       const res: ResponseMessageEntity = await DisorderService.deleteDisorder(
         id
       )
@@ -70,6 +69,7 @@ const Disorder: React.FC = (): JSX.Element => {
         description: "Data Penyakit berhasil dihapus",
       })
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
+      form.resetFields()
     },
     onError: (error) => {
       notification.error({
@@ -78,7 +78,7 @@ const Disorder: React.FC = (): JSX.Element => {
       })
     },
     onSettled: () => {
-      setDeletingDisorderId(null)
+      setDeletedId(null)
     },
   })
 
@@ -109,7 +109,7 @@ const Disorder: React.FC = (): JSX.Element => {
       })
     },
     onSettled: () => {
-      setDeletingDisorderId(null)
+      setDeletedId(null)
     },
   })
 
@@ -145,7 +145,7 @@ const Disorder: React.FC = (): JSX.Element => {
       })
     },
     onSettled: () => {
-      setDeletingDisorderId(null)
+      setDeletedId(null)
     },
   })
 
@@ -195,9 +195,9 @@ const Disorder: React.FC = (): JSX.Element => {
             <Button
               color="red"
               variant="solid"
-              loading={deletingDisorderId === record.id}
+              loading={deletedId === record.id}
             >
-              {deletingDisorderId === record.id ? null : "Hapus"}
+              {deletedId === record.id ? null : "Hapus"}
             </Button>
           </Popconfirm>
         ),

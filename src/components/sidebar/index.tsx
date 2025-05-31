@@ -130,7 +130,7 @@ const Sidebar: React.FC<props> = ({ collapsed }): JSX.Element => {
           theme={{
             components: {
               Menu: {
-                darkItemHoverBg: "#B42B3F",
+                darkItemHoverBg: "#A02334",
               },
             },
           }}
@@ -154,6 +154,9 @@ const Sidebar: React.FC<props> = ({ collapsed }): JSX.Element => {
                 okText: "Logout",
                 okButtonProps: {
                   danger: true,
+                },
+                cancelButtonProps: {
+                  className: "hover:!border-primary hover:!text-primary",
                 },
                 cancelText: "Batal",
                 onOk: () => {

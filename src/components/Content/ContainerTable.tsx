@@ -1,4 +1,4 @@
-import { type JSX } from "react"
+import { useState, type JSX } from "react"
 import { Button, Table, Typography, type TableProps } from "antd"
 import { AppstoreAddOutlined } from "@ant-design/icons"
 import EditableCell from "../Editable/EditableCell"
@@ -21,6 +21,8 @@ const ContainerTable = <T,>({
   isAdd,
   callback,
 }: props<T>): JSX.Element => {
+  const [pageSize, setPageSize] = useState<number>(5)
+
   return (
     <>
       <div className="flex flex-col md:flex-row md:justify-between">
@@ -46,7 +48,10 @@ const ContainerTable = <T,>({
         dataSource={data}
         showSorterTooltip={{ target: "sorter-icon" }}
         pagination={{
-          pageSize: 5,
+          pageSize,
+          showSizeChanger: true,
+          onShowSizeChange: (_current, size) => setPageSize(size),
+          pageSizeOptions: ["5", "10", "20", "50"],
           position: ["bottomRight"],
           showTotal: (total, range) =>
             `${range[0]}-${range[1]} dari ${total} data`,

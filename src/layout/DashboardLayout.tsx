@@ -51,7 +51,6 @@ const DashboardLayout: React.FC = (): JSX.Element => {
         <Content
           style={{
             margin: "16px",
-            background: "#f1f5f9",
           }}
         >
           <Outlet />

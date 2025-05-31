@@ -7,6 +7,7 @@ import AuthContextProvider from "./context/auth/AuthContextProvider"
 import { App as AntApp, ConfigProvider } from "antd"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { customMainTheme } from "./theme/cutom.theme"
+import TableActionContextProvider from "./context/TableAction/TableActionContextProvider"
 
 const queryClient: QueryClient = new QueryClient()
 
@@ -17,7 +18,9 @@ createRoot(document.getElementById("root")!).render(
         <AntApp>
           <ConfigProvider theme={customMainTheme}>
             <QueryClientProvider client={queryClient}>
-              <App />
+              <TableActionContextProvider>
+                <App />
+              </TableActionContextProvider>
             </QueryClientProvider>
           </ConfigProvider>
         </AntApp>
