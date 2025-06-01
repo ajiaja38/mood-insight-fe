@@ -49,7 +49,9 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
   const { data, error } = useQuery({
     queryKey: ["knowledgeBase"],
     queryFn: () =>
-      KnowledgeBaseService.getAllKnowledgeBase().then((res) => res.data),
+      KnowledgeBaseService.getAllKnowledgeBase().then(
+        (res: ResponseEntity<IGetKnowledgeBase[]>) => res.data
+      ),
   })
 
   const { data: disorders, error: errorDisorder } = useQuery({
@@ -103,15 +105,12 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       })
       queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
     },
-    onError: (error: any) => {
+    onError: (error: any) =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
-      })
-    },
-    onSettled: () => {
-      setDeletedId(null)
-    },
+      }),
+    onSettled: () => setDeletedId(null),
   })
 
   const handleOpenModal = () => setOpenModal(true)
@@ -135,20 +134,16 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
       form.resetFields()
     },
-    onError: (error: any) => {
+    onError: (error: any) =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
-      })
-    },
-    onSettled: () => {
-      setDeletedId(null)
-    },
+      }),
+    onSettled: () => setDeletedId(null),
   })
 
-  const onSubmit: FormProps<ICreateKnowledgeBase>["onFinish"] = (values) => {
+  const onSubmit: FormProps<ICreateKnowledgeBase>["onFinish"] = (values) =>
     createKnowledgeBase(values)
-  }
 
   const { mutate: updateKnowledgeBase, isPending: isUpdatePending } =
     useMutation({
@@ -171,20 +166,17 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
         setOpenModal(false)
         queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
       },
-      onError: (error: any) => {
+      onError: (error: any) =>
         notification.error({
           message: "Error",
           description: error.response.data.message,
-        })
-      },
-      onSettled: () => {
-        setDeletedId(null)
-      },
+        }),
+      onSettled: () => setDeletedId(null),
     })
 
-  const handleSave = (row: IGetKnowledgeBase) => {
-    updateKnowledgeBase(row)
-  }
+  const handleSave: (row: IGetKnowledgeBase) => void = (
+    row: IGetKnowledgeBase
+  ) => updateKnowledgeBase(row)
 
   const defaultColumns: (ColumnType<IGetKnowledgeBase> & {
     editable?: boolean
