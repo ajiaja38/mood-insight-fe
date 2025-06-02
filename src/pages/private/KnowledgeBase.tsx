@@ -248,7 +248,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       <BreadCrumb items={[{ title: "Basis Pengetahuan" }]} />
       <Container>
         <ContainerTable
-          title="Data Penyakit"
+          title="Data Basis Pengetahuan"
           data={data}
           columns={columns}
           isAdd={true}
