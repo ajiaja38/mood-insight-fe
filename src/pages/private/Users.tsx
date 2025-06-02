@@ -177,7 +177,7 @@ const Users: React.FC = (): JSX.Element => {
       <BreadCrumb items={[{ title: "Pengguna" }]} />
       <Container>
         <ContainerTable<DataTypes>
-          title="Daftar Pengguna"
+          title="Data Pengguna"
           columns={columns}
           data={data}
         />
