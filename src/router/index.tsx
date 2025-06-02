@@ -15,6 +15,7 @@ import Solution from "../pages/private/Solution"
 import KnowledgeBase from "../pages/private/KnowledgeBase"
 import Profile from "../pages/private/Profile"
 import Dashboard404 from "../pages/private/error"
+import DetailDiagnosisResult from "../pages/private/DetailDiagnosisResult"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -63,6 +64,10 @@ export const router: ReturnType<typeof createBrowserRouter> =
             {
               path: "/hasil-diagnosa",
               element: <DiagnosisResult />,
+            },
+            {
+              path: "/hasil-diagnosa/:id",
+              element: <DetailDiagnosisResult />,
             },
             {
               path: "/solusi",
