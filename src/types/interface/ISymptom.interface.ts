@@ -1,4 +1,10 @@
 export interface IGetSymptom {
-  id: number
+  id: string
   symptom: string
 }
+
+export interface ICreateSymptom {
+  symptom: string
+}
+
+export type IUpdateSymptom = ICreateSymptom

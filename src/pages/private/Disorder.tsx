@@ -47,12 +47,11 @@ const Disorder: React.FC = (): JSX.Element => {
       ),
   })
 
-  if (error) {
+  if (error)
     notification.error({
       message: "Error",
       description: error.message,
     })
-  }
 
   const { mutate: deleteDisorder } = useMutation({
     mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
@@ -71,15 +70,12 @@ const Disorder: React.FC = (): JSX.Element => {
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
       form.resetFields()
     },
-    onError: (error) => {
+    onError: (error) =>
       notification.error({
         message: "Error",
         description: error.message,
-      })
-    },
-    onSettled: () => {
-      setDeletedId(null)
-    },
+      }),
+    onSettled: () => setDeletedId(null),
   })
 
   const handleOpenModal = () => setOpenModal(true)
@@ -102,20 +98,16 @@ const Disorder: React.FC = (): JSX.Element => {
       setOpenModal(false)
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
     },
-    onError: (error) => {
+    onError: (error) =>
       notification.error({
         message: "Error",
         description: error.message,
-      })
-    },
-    onSettled: () => {
-      setDeletedId(null)
-    },
+      }),
+    onSettled: () => setDeletedId(null),
   })
 
-  const onSubmit: FormProps<ICreateDisorder>["onFinish"] = (values) => {
+  const onSubmit: FormProps<ICreateDisorder>["onFinish"] = (values) =>
     createDisorder(values)
-  }
 
   const { mutate: updateDisorder, isPending: isUpdatePending } = useMutation({
     mutationKey: ["updateDisorder"],
@@ -138,15 +130,12 @@ const Disorder: React.FC = (): JSX.Element => {
       setOpenModal(false)
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
     },
-    onError: (error) => {
+    onError: (error) =>
       notification.error({
         message: "Error",
         description: error.message,
-      })
-    },
-    onSettled: () => {
-      setDeletedId(null)
-    },
+      }),
+    onSettled: () => setDeletedId(null),
   })
 
   const handleSave = (row: IGetDisorder) => {
