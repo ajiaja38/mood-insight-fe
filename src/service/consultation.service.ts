@@ -18,7 +18,7 @@ export class ConsultationService {
 
   public static async getConsultation(
     isUser?: boolean
-  ): Promise<ResponseEntity<IConsultation>> {
+  ): Promise<ResponseEntity<IConsultation[]>> {
     const path: string = isUser ? "consultation/user" : "consultation"
 
     return await api.get(path)
