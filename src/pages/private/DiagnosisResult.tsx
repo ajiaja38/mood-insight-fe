@@ -8,6 +8,7 @@ import type { IConsultation } from "../../types/interface/IConsultation.interfac
 import Container from "../../components/Content/Container"
 import ContainerTable from "../../components/Content/ContainerTable"
 import { NavLink } from "react-router-dom"
+import { timeIdFormat } from "../../utils/pipe/timeIdFormat.pipe"
 
 const DiagnosisResult: React.FC = (): JSX.Element => {
   const { notification } = App.useApp()
@@ -57,18 +58,7 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
       ellipsis: {
         showTitle: false,
       },
-      render: (_, { createdAt }) => {
-        const date: Date = new Date(createdAt)
-        const idFormat: Intl.DateTimeFormat = new Intl.DateTimeFormat("id-ID", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "2-digit",
-          hour: "numeric",
-          minute: "numeric",
-        })
-        return idFormat.format(date)
-      },
+      render: (_, { createdAt }) => timeIdFormat(new Date(createdAt)),
     },
     {
       title: "Aksi",

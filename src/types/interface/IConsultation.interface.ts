@@ -39,6 +39,8 @@ export interface IDetailConsultation {
   userId: string
   user: string
   userAddress: string
+  userEmail: string
+  userPhoneNumber: string
   symptoms: symptom[]
   diagnosisResult: diagnosisResult[]
   solution: string[]
