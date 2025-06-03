@@ -2,17 +2,15 @@ import type {
   IConsultation,
   ICreateConsultation,
   IDetailConsultation,
+  IResCreateConsultation,
 } from "../types/interface/IConsultation.interface"
-import type {
-  ResponseEntity,
-  ResponseMessageEntity,
-} from "../types/interface/IResponse.interface"
+import type { ResponseEntity } from "../types/interface/IResponse.interface"
 import { api } from "./global/api.instance"
 
 export class ConsultationService {
   public static async createConsultation(
     data: ICreateConsultation
-  ): Promise<ResponseMessageEntity> {
+  ): Promise<ResponseEntity<IResCreateConsultation>> {
     return await api.post("consultation", data)
   }
 

@@ -2,6 +2,14 @@ export interface ICreateConsultation {
   symptomIds: string[]
 }
 
+export interface IResCreateConsultation {
+  consultationId: string
+  result: {
+    disorders: string[]
+    belief: number
+  }
+}
+
 export interface IConsultation {
   id: string
   user: string
