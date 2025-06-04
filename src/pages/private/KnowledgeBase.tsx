@@ -50,15 +50,16 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
     queryKey: ["knowledgeBase"],
     queryFn: () =>
       KnowledgeBaseService.getAllKnowledgeBase().then(
-        (res: ResponseEntity<IGetKnowledgeBase[]>) => res.data
+        (res: ResponseEntity<IGetKnowledgeBase[]>): IGetKnowledgeBase[] =>
+          res.data
       ),
   })
 
   const { data: disorders, error: errorDisorder } = useQuery({
     queryKey: ["disorderList"],
-    queryFn: () =>
+    queryFn: (): Promise<IGetDisorder[]> =>
       DisorderService.getAllDisorder().then(
-        (res: ResponseEntity<IGetDisorder[]>) => res.data
+        (res: ResponseEntity<IGetDisorder[]>): IGetDisorder[] => res.data
       ),
     enabled: openModal,
   })
@@ -67,7 +68,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
     queryKey: ["symptomList"],
     queryFn: () =>
       SymptomService.getAllSymptom().then(
-        (res: ResponseEntity<IGetSymptom[]>) => res.data
+        (res: ResponseEntity<IGetSymptom[]>): IGetSymptom[] => res.data
       ),
     enabled: openModal,
   })
@@ -95,22 +96,22 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       setDeletedId(id)
       const res: ResponseMessageEntity =
         await KnowledgeBaseService.deleteKnowledgeBase(id)
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       notification.success({
         message: "Success",
         description: "Basis Pengetahuan berhasil dihapus",
       })
       queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
     },
-    onError: (error: any) =>
+    onError: (error: any): void =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
       }),
-    onSettled: () => setDeletedId(null),
+    onSettled: (): void => setDeletedId(null),
   })
 
   const handleOpenModal = () => setOpenModal(true)
@@ -125,7 +126,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       await new Promise((resolve) => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       notification.success({
         message: "Success",
         description: "Berhasil menambahkan Basis Pengetahuan",
@@ -134,12 +135,12 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
       form.resetFields()
     },
-    onError: (error: any) =>
+    onError: (error: any): void =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
       }),
-    onSettled: () => setDeletedId(null),
+    onSettled: (): void => setDeletedId(null),
   })
 
   const onSubmit: FormProps<ICreateKnowledgeBase>["onFinish"] = (values) =>
@@ -155,10 +156,10 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
           await KnowledgeBaseService.updateKnowledgeBase(data.id, {
             weight: data.weight,
           })
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+        await new Promise((resolve): number => setTimeout(resolve, 2000))
         return res
       },
-      onSuccess: () => {
+      onSuccess: (): void => {
         notification.success({
           message: "Success",
           description: "Berhasil memperbarui Basis Pengetahuan",
@@ -166,17 +167,17 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
         setOpenModal(false)
         queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
       },
-      onError: (error: any) =>
+      onError: (error: any): void =>
         notification.error({
           message: "Error",
           description: error.response.data.message,
         }),
-      onSettled: () => setDeletedId(null),
+      onSettled: (): void => setDeletedId(null),
     })
 
   const handleSave: (row: IGetKnowledgeBase) => void = (
     row: IGetKnowledgeBase
-  ) => updateKnowledgeBase(row)
+  ): void => updateKnowledgeBase(row)
 
   const defaultColumns: (ColumnType<IGetKnowledgeBase> & {
     editable?: boolean
@@ -185,25 +186,25 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      sorter: (a, b) => a.id.localeCompare(b.id),
+      sorter: (a, b): number => a.id.localeCompare(b.id),
     },
     {
       title: "Gejala",
       dataIndex: "symptom",
       key: "name",
-      sorter: (a, b) => a.symptom.localeCompare(b.symptom),
+      sorter: (a, b): number => a.symptom.localeCompare(b.symptom),
     },
     {
       title: "Penyakit",
       dataIndex: "disorder",
       key: "disorder",
-      sorter: (a, b) => a.disorder.localeCompare(b.disorder),
+      sorter: (a, b): number => a.disorder.localeCompare(b.disorder),
     },
     {
       title: "Bobot",
       dataIndex: "weight",
       key: "weight",
-      sorter: (a, b) => a.weight - b.weight,
+      sorter: (a, b): number => a.weight - b.weight,
       editable: true,
     },
     {
@@ -259,9 +260,9 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
         title="Tambah Data Basis Pengetahuan"
         open={openModal}
         confirmLoading={isPending}
-        onOk={() => form.submit()}
+        onOk={(): void => form.submit()}
         closable={{ "aria-label": "Custom Close Button" }}
-        onCancel={() => setOpenModal(false)}
+        onCancel={(): void => setOpenModal(false)}
       >
         <Form
           form={form}
@@ -282,11 +283,16 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
           >
             <Select placeholder="Pilih data penyakit">
               {disorders?.length
-                ? disorders.map(({ id, name }: IGetDisorder, index: number) => (
-                    <Option key={index} value={id}>
-                      {id} - {name}
-                    </Option>
-                  ))
+                ? disorders.map(
+                    (
+                      { id, name }: IGetDisorder,
+                      index: number
+                    ): JSX.Element => (
+                      <Option key={index} value={id}>
+                        {id} - {name}
+                      </Option>
+                    )
+                  )
                 : null}
             </Select>
           </Form.Item>
@@ -302,11 +308,13 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
           >
             <Select placeholder="Pilih data gejala">
               {symptoms?.length
-                ? symptoms.map(({ id, symptom }: IGetSymptom) => (
-                    <Option key={id} value={id}>
-                      {id} - {symptom}
-                    </Option>
-                  ))
+                ? symptoms.map(
+                    ({ id, symptom }: IGetSymptom): JSX.Element => (
+                      <Option key={id} value={id}>
+                        {id} - {symptom}
+                      </Option>
+                    )
+                  )
                 : null}
             </Select>
           </Form.Item>
@@ -321,11 +329,13 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
             ]}
           >
             <Select placeholder="Pilih bobot Basis Pengetahuan">
-              {DATA_WEIGHT.map((weight: number, index: number) => (
-                <Option key={index} value={weight}>
-                  {weight}
-                </Option>
-              ))}
+              {DATA_WEIGHT.map(
+                (weight: number, index: number): JSX.Element => (
+                  <Option key={index} value={weight}>
+                    {weight}
+                  </Option>
+                )
+              )}
             </Select>
           </Form.Item>
         </Form>
