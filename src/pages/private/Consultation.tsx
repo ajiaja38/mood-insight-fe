@@ -45,12 +45,12 @@ const Consultation: React.FC = (): JSX.Element => {
         await ConsultationService.createConsultation(data).then(
           (res) => res.data
         )
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return response
     },
-    onSuccess: (response: IResCreateConsultation) =>
+    onSuccess: (response: IResCreateConsultation): void | Promise<void> =>
       navigate(`/hasil-diagnosa/${response.consultationId}`),
-    onError: (error: any) =>
+    onError: (error: any): void =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
@@ -71,14 +71,18 @@ const Consultation: React.FC = (): JSX.Element => {
           <Checkbox.Group onChange={onChange}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {data?.length
-                ? data.map((symptom: IGetSymptom) => (
-                    <div
-                      key={symptom.id}
-                      className="p-3 border border-gray-300 bg-gray-50 hover:shadow-md transition-all ease-in-out duration-150 rounded-lg"
-                    >
-                      <Checkbox value={symptom.id}>{symptom.symptom}</Checkbox>
-                    </div>
-                  ))
+                ? data.map(
+                    (symptom: IGetSymptom): JSX.Element => (
+                      <div
+                        key={symptom.id}
+                        className="p-3 border border-gray-300 bg-gray-50 hover:shadow-md transition-all ease-in-out duration-150 rounded-lg"
+                      >
+                        <Checkbox value={symptom.id}>
+                          {symptom.symptom}
+                        </Checkbox>
+                      </div>
+                    )
+                  )
                 : null}
             </div>
           </Checkbox.Group>
@@ -87,7 +91,7 @@ const Consultation: React.FC = (): JSX.Element => {
           type="primary"
           size="large"
           loading={isPending}
-          onClick={() => {
+          onClick={(): void => {
             if (!symptomIds.length)
               return notification.error({
                 message: "Error",
