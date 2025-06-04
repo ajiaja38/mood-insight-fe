@@ -21,9 +21,7 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
         ConsultationService.getDetailConsultation(id as string).then(
           (res) => res.data
         )
-
       await new Promise((resolve): number => setTimeout(resolve, 2000))
-
       return response
     },
   })
