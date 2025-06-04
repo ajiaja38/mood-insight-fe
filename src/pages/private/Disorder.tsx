@@ -8,6 +8,7 @@ import {
   Input,
   Modal,
   Popconfirm,
+  type FormInstance,
   type FormProps,
 } from "antd"
 import {
@@ -34,7 +35,8 @@ import useTableAction from "../../hooks/useTableAction"
 const Disorder: React.FC = (): JSX.Element => {
   const { deletedId, setDeletedId, openModal, setOpenModal } = useTableAction()
 
-  const [form] = Form.useForm<ICreateDisorder>()
+  const [form]: [FormInstance<ICreateDisorder>] =
+    Form.useForm<ICreateDisorder>()
 
   const { notification } = App.useApp()
   const queryClient: QueryClient = useQueryClient()
