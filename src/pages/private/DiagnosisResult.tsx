@@ -9,6 +9,7 @@ import Container from "../../components/Content/Container"
 import ContainerTable from "../../components/Content/ContainerTable"
 import { NavLink } from "react-router-dom"
 import { timeIdFormat } from "../../utils/pipe/timeIdFormat.pipe"
+import type { ResponseEntity } from "../../types/interface/IResponse.interface"
 
 const DiagnosisResult: React.FC = (): JSX.Element => {
   const { notification } = App.useApp()
@@ -16,7 +17,9 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
   const { data, error } = useQuery({
     queryKey: ["diagnosis-result"],
     queryFn: (): Promise<IConsultation[]> =>
-      ConsultationService.getConsultation().then((res) => res.data),
+      ConsultationService.getConsultation().then(
+        (res: ResponseEntity<IConsultation[]>) => res.data
+      ),
   })
 
   if (error)
@@ -30,13 +33,13 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
       title: "ID Konsultasi",
       dataIndex: "id",
       key: "id",
-      sorter: (a, b) => a.id.localeCompare(b.id),
+      sorter: (a, b): number => a.id.localeCompare(b.id),
     },
     {
       title: "Nama Pengguna",
       dataIndex: "user",
       key: "user",
-      sorter: (a, b) => a.user.localeCompare(b.user),
+      sorter: (a, b): number => a.user.localeCompare(b.user),
       ellipsis: {
         showTitle: false,
       },
@@ -45,7 +48,7 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
       title: "Hasil",
       dataIndex: "result",
       key: "result",
-      sorter: (a, b) => a.result.localeCompare(b.result),
+      sorter: (a, b): number => a.result.localeCompare(b.result),
       ellipsis: {
         showTitle: false,
       },
@@ -54,7 +57,7 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
       title: "Tanggal Konsultasi",
       dataIndex: "createdAt",
       key: "createdAt",
-      sorter: (a, b) => a.createdAt.localeCompare(b.createdAt),
+      sorter: (a, b): number => a.createdAt.localeCompare(b.createdAt),
       ellipsis: {
         showTitle: false,
       },
@@ -63,7 +66,7 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
     {
       title: "Aksi",
       key: "action",
-      render: (_, record) => (
+      render: (_, record): JSX.Element => (
         <NavLink to={`/hasil-diagnosa/${record.id}`}>
           <Button color="primary" variant="solid">
             Detail
