@@ -2,7 +2,7 @@ import React, { type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
 import { useParams } from "react-router-dom"
-import { App, Timeline, Typography } from "antd"
+import { App, Divider, Skeleton, Timeline, Typography } from "antd"
 import { useQuery } from "@tanstack/react-query"
 import type { IDetailConsultation } from "../../types/interface/IConsultation.interface"
 import { ConsultationService } from "../../service/consultation.service"
@@ -14,12 +14,18 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
 
   const { notification } = App.useApp()
 
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["detail-diagnosis-result", id],
-    queryFn: (): Promise<IDetailConsultation> =>
-      ConsultationService.getDetailConsultation(id as string).then(
-        (res) => res.data
-      ),
+    queryFn: async (): Promise<IDetailConsultation> => {
+      const response: Promise<IDetailConsultation> =
+        ConsultationService.getDetailConsultation(id as string).then(
+          (res) => res.data
+        )
+
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
+
+      return response
+    },
   })
 
   if (error)
@@ -34,6 +40,47 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
     },
     data?.diagnosisResult[0]
   )
+
+  if (isLoading)
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Container>
+          <Skeleton active />
+        </Container>
+        <Container>
+          <Skeleton active />
+        </Container>
+        <div className="lg:col-span-2">
+          <Container>
+            <Skeleton active />
+            <Divider />
+            <div className="flex flex-col gap-y-1.5">
+              <Skeleton.Input
+                active
+                size="small"
+                style={{
+                  width: "100%",
+                }}
+              />
+              <Skeleton.Input
+                active
+                size="small"
+                style={{
+                  width: "100%",
+                }}
+              />
+              <Skeleton.Input
+                active
+                size="small"
+                style={{
+                  width: "100%",
+                }}
+              />
+            </div>
+          </Container>
+        </div>
+      </div>
+    )
 
   return (
     <>
