@@ -55,7 +55,7 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
             style={{
               marginTop: 40,
             }}
-            items={data?.symptoms.map((symptom) => ({
+            items={data?.symptoms.map((symptom): { children: string } => ({
               children: symptom.symptom,
             }))}
           />
@@ -119,13 +119,15 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
               <div className="flex flex-col">
                 <Typography.Title level={2}>Solusi:</Typography.Title>
                 <div className="flex flex-col gap-3">
-                  {data?.solution.map((solution: string, index: number) => (
-                    <div key={index} className="p-3 bg-quaternary rounded-lg">
-                      <p className="text-lg text-gray-900 font-semibold">
-                        {solution}
-                      </p>
-                    </div>
-                  ))}
+                  {data?.solution.map(
+                    (solution: string, index: number): JSX.Element => (
+                      <div key={index} className="p-3 bg-quaternary rounded-lg">
+                        <p className="text-lg text-gray-900 font-semibold">
+                          {solution}
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>
