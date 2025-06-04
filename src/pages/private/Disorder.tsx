@@ -41,7 +41,7 @@ const Disorder: React.FC = (): JSX.Element => {
 
   const { data, error } = useQuery({
     queryKey: ["disorders"],
-    queryFn: () =>
+    queryFn: (): Promise<IGetDisorder[]> =>
       DisorderService.getAllDisorder().then(
         (res: ResponseEntity<IGetDisorder[]>) => res.data
       ),
@@ -59,10 +59,10 @@ const Disorder: React.FC = (): JSX.Element => {
       const res: ResponseMessageEntity = await DisorderService.deleteDisorder(
         id
       )
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       notification.success({
         message: "Success",
         description: "Data Penyakit berhasil dihapus",
@@ -70,15 +70,15 @@ const Disorder: React.FC = (): JSX.Element => {
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
       form.resetFields()
     },
-    onError: (error) =>
+    onError: (error): void =>
       notification.error({
         message: "Error",
         description: error.message,
       }),
-    onSettled: () => setDeletedId(null),
+    onSettled: (): void => setDeletedId(null),
   })
 
-  const handleOpenModal = () => setOpenModal(true)
+  const handleOpenModal = (): void => setOpenModal(true)
 
   const { mutate: createDisorder, isPending } = useMutation({
     mutationKey: ["createDisorder"],
@@ -87,10 +87,10 @@ const Disorder: React.FC = (): JSX.Element => {
     ): Promise<ResponseEntity<IGetDisorder>> => {
       const res: ResponseEntity<IGetDisorder> =
         await DisorderService.createDisorder(data)
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       notification.success({
         message: "Success",
         description: "Berhasil menambahkan penyakit",
@@ -98,15 +98,15 @@ const Disorder: React.FC = (): JSX.Element => {
       setOpenModal(false)
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
     },
-    onError: (error) =>
+    onError: (error): void =>
       notification.error({
         message: "Error",
         description: error.message,
       }),
-    onSettled: () => setDeletedId(null),
+    onSettled: (): void => setDeletedId(null),
   })
 
-  const onSubmit: FormProps<ICreateDisorder>["onFinish"] = (values) =>
+  const onSubmit: FormProps<ICreateDisorder>["onFinish"] = (values): void =>
     createDisorder(values)
 
   const { mutate: updateDisorder, isPending: isUpdatePending } = useMutation({
@@ -119,10 +119,10 @@ const Disorder: React.FC = (): JSX.Element => {
           name: data.name,
           description: data.description,
         })
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: (res: ResponseEntity<IGetDisorder>) => {
+    onSuccess: (res: ResponseEntity<IGetDisorder>): void => {
       notification.success({
         message: "Success",
         description: `Berhasil memperbarui ${res.data.name}`,
@@ -130,17 +130,15 @@ const Disorder: React.FC = (): JSX.Element => {
       setOpenModal(false)
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
     },
-    onError: (error) =>
+    onError: (error): void =>
       notification.error({
         message: "Error",
         description: error.message,
       }),
-    onSettled: () => setDeletedId(null),
+    onSettled: (): void => setDeletedId(null),
   })
 
-  const handleSave = (row: IGetDisorder) => {
-    updateDisorder(row)
-  }
+  const handleSave = (row: IGetDisorder): void => updateDisorder(row)
 
   const defaultColumns: (ColumnType<IGetDisorder> & { editable?: boolean })[] =
     [
@@ -148,13 +146,13 @@ const Disorder: React.FC = (): JSX.Element => {
         title: "ID",
         dataIndex: "id",
         key: "id",
-        sorter: (a, b) => a.id.localeCompare(b.id),
+        sorter: (a, b): number => a.id.localeCompare(b.id),
       },
       {
         title: "Nama Penyakit",
         dataIndex: "name",
         key: "name",
-        sorter: (a, b) => a.name.localeCompare(b.name),
+        sorter: (a, b): number => a.name.localeCompare(b.name),
         ellipsis: {
           showTitle: false,
         },
@@ -164,7 +162,7 @@ const Disorder: React.FC = (): JSX.Element => {
         title: "Deskripsi",
         dataIndex: "description",
         key: "description",
-        render: (_, { description }) => (
+        render: (_, { description }): JSX.Element => (
           <p className="text-justify">{description}</p>
         ),
         editable: true,
@@ -172,11 +170,11 @@ const Disorder: React.FC = (): JSX.Element => {
       {
         title: "Aksi",
         key: "action",
-        render: (_, record: IGetDisorder) => (
+        render: (_, record: IGetDisorder): JSX.Element => (
           <Popconfirm
             title="Hapus Data Penyakit?"
             description={`Hapus data penyakit ${record.name}?`}
-            onConfirm={() => deleteDisorder(record.id)}
+            onConfirm={(): void => deleteDisorder(record.id)}
             okText="Hapus"
             cancelText="Batal"
             okButtonProps={{ danger: true }}
@@ -226,7 +224,7 @@ const Disorder: React.FC = (): JSX.Element => {
         title="Tambah Data Penyakit"
         open={openModal}
         confirmLoading={isPending}
-        onOk={() => form.submit()}
+        onOk={(): void => form.submit()}
         closable={{ "aria-label": "Custom Close Button" }}
         onCancel={() => setOpenModal(false)}
       >
