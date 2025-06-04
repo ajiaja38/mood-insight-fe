@@ -47,7 +47,7 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
       />
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Container>
-          <Typography.Title level={2}>Gejala Daftar</Typography.Title>
+          <Typography.Title level={2}>Daftar Gejala</Typography.Title>
           <Typography.Text type="secondary">
             Berikut daftar gejala yang dipilih pasien :
           </Typography.Text>
