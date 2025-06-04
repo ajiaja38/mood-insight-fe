@@ -43,7 +43,7 @@ const Disorder: React.FC = (): JSX.Element => {
     queryKey: ["disorders"],
     queryFn: (): Promise<IGetDisorder[]> =>
       DisorderService.getAllDisorder().then(
-        (res: ResponseEntity<IGetDisorder[]>) => res.data
+        (res: ResponseEntity<IGetDisorder[]>): IGetDisorder[] => res.data
       ),
   })
 

@@ -23,27 +23,26 @@ const RegisterPage: React.FC = (): JSX.Element => {
     ): Promise<ResponseEntity<IRegisterResponse>> => {
       const res: ResponseEntity<IRegisterResponse> =
         await UserService.registerUser(data)
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve): number => setTimeout(resolve, 2000))
       return res
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       notification.success({
         message: "Sukses",
         description: "Pendaftaran berhasil, silahkan login!",
       })
       navigate("/login")
     },
-    onError: (error: any) => {
+    onError: (error: any): void =>
       notification.error({
         message: "Error",
         description: error.response.data.message,
-      })
-    },
+      }),
   })
 
-  const onFinish: FormProps<IRegisterPayload>["onFinish"] = (values) => {
-    mutate(values)
-  }
+  const onFinish: FormProps<IRegisterPayload>["onFinish"] = (
+    values: IRegisterPayload
+  ): void => mutate(values)
 
   return (
     <>

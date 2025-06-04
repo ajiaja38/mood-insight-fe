@@ -13,18 +13,18 @@ const LoginPage: React.FC = (): JSX.Element => {
   const auth: IAuthContext = useAuth()
   const navigate: NavigateFunction = useNavigate()
 
-  const onFinish: FormProps<ILoginPayload>["onFinish"] = async (values) => {
+  const onFinish: FormProps<ILoginPayload>["onFinish"] = async (
+    values: ILoginPayload
+  ) => {
     setLoading(true)
-    setTimeout(async () => {
+    setTimeout(async (): Promise<void> => {
       await auth.login(values)
       navigate("/dashboard")
       setLoading(false)
     }, 1500)
   }
 
-  useEffect(() => {
-    LocalStorageService.remove()
-  }, [])
+  useEffect((): void => LocalStorageService.remove(), [])
 
   return (
     <>
