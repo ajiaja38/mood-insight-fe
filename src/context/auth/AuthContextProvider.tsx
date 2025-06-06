@@ -74,6 +74,12 @@ const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     return decoded.role
   }, [])
 
+  const getName = useCallback((): string => {
+    const token: string | null = LocalStorageService.getAccessToken()
+    const decoded: IJwtPayload = jwtDecode<IJwtPayload>(token as string)
+    return decoded.name
+  }, [])
+
   useEffect(() => {
     setIsAuthenticated(LocalStorageService.isAuthenticated())
   }, [])
@@ -86,8 +92,17 @@ const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       refreshToken,
       isAuthenticated,
       getRole,
+      getName,
     }),
-    [login, logout, accessToken, refreshToken, isAuthenticated, getRole]
+    [
+      login,
+      logout,
+      accessToken,
+      refreshToken,
+      isAuthenticated,
+      getRole,
+      getName,
+    ]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

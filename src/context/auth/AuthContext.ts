@@ -9,6 +9,7 @@ export interface IAuthContext {
   refreshToken: string | null
   isAuthenticated: boolean
   getRole: () => ERole
+  getName: () => string
 }
 
 export const AuthContext: Context<IAuthContext | null> =
