@@ -12,25 +12,41 @@ export class DisorderService {
   public static async createDisorder(
     data: ICreateDisorder
   ): Promise<ResponseEntity<IGetDisorder>> {
-    return api.post("disorder", data)
+    return api.post("disorder", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async getAllDisorder(): Promise<
     ResponseEntity<IGetDisorder[]>
   > {
-    return api.get("disorder")
+    return api.get("disorder", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async updateDisorder(
     id: string,
     data: ICreateDisorder
   ): Promise<ResponseEntity<IGetDisorder>> {
-    return api.put(`disorder/${id}`, data)
+    return api.put(`disorder/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async deleteDisorder(
     id: string
   ): Promise<ResponseMessageEntity> {
-    return api.delete(`disorder/${id}`)
+    return api.delete(`disorder/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 }

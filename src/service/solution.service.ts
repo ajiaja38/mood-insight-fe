@@ -12,23 +12,39 @@ export class SolutionSerice {
   public static async createSolution(
     data: ICreateSolution
   ): Promise<ResponseEntity<IGetSolution>> {
-    return await api.post("solution", data)
+    return await api.post("solution", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async getSolution(): Promise<ResponseEntity<IGetSolution[]>> {
-    return await api.get("solution")
+    return await api.get("solution", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async updateSolution(
     id: string,
     data: ICreateSolution
   ): Promise<ResponseEntity<IGetSolution>> {
-    return await api.put(`solution/${id}`, data)
+    return await api.put(`solution/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async deleteSolution(
     id: string
   ): Promise<ResponseMessageEntity> {
-    return await api.delete(`solution/${id}`)
+    return await api.delete(`solution/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 }

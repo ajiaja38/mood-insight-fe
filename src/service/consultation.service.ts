@@ -11,7 +11,11 @@ export class ConsultationService {
   public static async createConsultation(
     data: ICreateConsultation
   ): Promise<ResponseEntity<IResCreateConsultation>> {
-    return await api.post("consultation", data)
+    return await api.post("consultation", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async getConsultation(
@@ -19,12 +23,20 @@ export class ConsultationService {
   ): Promise<ResponseEntity<IConsultation[]>> {
     const path: string = isUser ? "consultation/user" : "consultation"
 
-    return await api.get(path)
+    return await api.get(path, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 
   public static async getDetailConsultation(
     id: string
   ): Promise<ResponseEntity<IDetailConsultation>> {
-    return await api.get(`consultation/${id}`)
+    return await api.get(`consultation/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
   }
 }
