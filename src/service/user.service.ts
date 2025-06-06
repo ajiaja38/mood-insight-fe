@@ -52,6 +52,14 @@ export class UserService {
     })
   }
 
+  public static async getProfile(): Promise<ResponseEntity<IDetailUser>> {
+    return api.get("user/data/profile", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+  }
+
   public static async updateUser(
     payload: IUpdateUserPayload
   ): Promise<ResponseEntity<IRegisterResponse>> {

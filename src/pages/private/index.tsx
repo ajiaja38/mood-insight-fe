@@ -1,7 +1,7 @@
 import React, { type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
 import BreadCrumb from "../../components/Breadcumb"
-import { App, Statistic } from "antd"
+import { App, Statistic, Typography } from "antd"
 import { TeamOutlined, ExceptionOutlined } from "@ant-design/icons"
 import Container from "../../components/Content/Container"
 import { COLOR } from "../../utils/constant/color.constant"
@@ -10,13 +10,28 @@ import { UserService } from "../../service/user.service"
 import type { IConsultation } from "../../types/interface/IConsultation.interface"
 import type { ResponseEntity } from "../../types/interface/IResponse.interface"
 import { ConsultationService } from "../../service/consultation.service"
+import type {
+  IDetailUser,
+  IGetAllUser,
+} from "../../types/interface/IUser.interface"
 
 const DashboardHome: React.FC = (): JSX.Element => {
   const { notification } = App.useApp()
 
+  const { data: user, error: errorUser } = useQuery({
+    queryKey: ["detail-admin"],
+    queryFn: (): Promise<IDetailUser> =>
+      UserService.getProfile().then(
+        (res: ResponseEntity<IDetailUser>) => res.data
+      ),
+  })
+
   const { data: users, error: errorUsers } = useQuery({
     queryKey: ["users-length"],
-    queryFn: () => UserService.getAllUser().then((res) => res.data),
+    queryFn: (): Promise<IGetAllUser[]> =>
+      UserService.getAllUser().then(
+        (res: ResponseEntity<IGetAllUser[]>) => res.data
+      ),
   })
 
   const { data: consultations, error: errorConsultation } = useQuery({
@@ -37,6 +52,12 @@ const DashboardHome: React.FC = (): JSX.Element => {
     notification.error({
       message: "Error",
       description: errorConsultation.message,
+    })
+
+  if (errorUser)
+    notification.error({
+      message: "Error",
+      description: errorUser.message,
     })
 
   return (
@@ -62,6 +83,13 @@ const DashboardHome: React.FC = (): JSX.Element => {
             suffix=" Konsultasi"
           />
         </Container>
+        <div className="lg:col-span-2">
+          <Container>
+            <Typography.Title level={3}>
+              Halo, Selamat Datang {user?.name}
+            </Typography.Title>
+          </Container>
+        </div>
       </div>
     </>
   )
