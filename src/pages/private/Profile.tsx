@@ -45,12 +45,11 @@ const Profile: React.FC = (): JSX.Element => {
       UserService.getProfile().then((res) => res.data),
   })
 
-  if (error) {
+  if (error)
     notification.error({
       message: "Error",
       description: error.message,
     })
-  }
 
   const handleOpenMOdal = (): void => setOpenModal(true)
 
