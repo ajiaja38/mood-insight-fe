@@ -101,43 +101,21 @@ const Profile: React.FC = (): JSX.Element => {
       <Container>
         <Typography.Title level={2}>Informasi Pasien</Typography.Title>
         <div className="mt-3 flex flex-col gap-y-3">
-          <div className="flex flex-col">
-            <Typography.Text type="secondary">Nama: </Typography.Text>
-            <p className="font-semibold text-lg">{data?.name}</p>
-          </div>
-          <div className="flex flex-col">
-            <Typography.Text type="secondary">Email: </Typography.Text>
-            <p className="font-semibold text-lg">{data?.email}</p>
-          </div>
-          <div className="flex flex-col">
-            <Typography.Text type="secondary">Nomor Telepon: </Typography.Text>
-            <p className="font-semibold text-lg">{data?.phoneNumber}</p>
-          </div>
-          <div className="flex flex-col">
-            <Typography.Text type="secondary">Alamat: </Typography.Text>
-            <p className="font-semibold text-lg">{data?.address}</p>
-          </div>
+          <UserInfo label="Nama:" value={data?.name} />
+          <UserInfo label="Email:" value={data?.email} />
+          <UserInfo label="Nomor Telepon:" value={data?.phoneNumber} />
+          <UserInfo label="Alamat:" value={data?.address} />
           <div className="flex gap-2">
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">Role: </Typography.Text>
-              <div>
-                <Tag color={data?.role === ERole.ADMIN ? "gold" : "purple"}>
-                  {data?.role}
-                </Tag>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">
-                Jenis Kelamin:{" "}
-              </Typography.Text>
-              <div>
-                <Tag
-                  color={data?.gender === EGender.LAKI_LAKI ? "blue" : "lime"}
-                >
-                  {data?.gender}
-                </Tag>
-              </div>
-            </div>
+            <IUserInfoTag
+              label="Role:"
+              color={data?.role === ERole.ADMIN ? "gold" : "purple"}
+              data={data?.role}
+            />
+            <IUserInfoTag
+              label="Jenis Kelamin:"
+              color={data?.gender === EGender.LAKI_LAKI ? "blue" : "lime"}
+              data={data?.gender}
+            />
           </div>
           <div className="my-4">
             <Button type="primary" onClick={handleOpenMOdal}>
@@ -207,6 +185,35 @@ const Profile: React.FC = (): JSX.Element => {
         </Form>
       </Modal>
     </>
+  )
+}
+
+interface IUserInfo {
+  label: string
+  value?: string
+}
+
+const UserInfo: React.FC<IUserInfo> = ({ label, value }): JSX.Element => {
+  return (
+    <div className="flex flex-col">
+      <Typography.Text type="secondary">{label}:</Typography.Text>
+      <p className="font-semibold text-lg">{value}</p>
+    </div>
+  )
+}
+
+const IUserInfoTag: React.FC<{
+  label: string
+  color?: string
+  data?: string
+}> = ({ label, color, data }) => {
+  return (
+    <div className="flex flex-col">
+      <Typography.Text type="secondary">{label}</Typography.Text>
+      <div>
+        <Tag color={color}>{data}</Tag>
+      </div>
+    </div>
   )
 }
 
