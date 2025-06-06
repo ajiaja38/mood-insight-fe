@@ -78,21 +78,21 @@ const Profile: React.FC = (): JSX.Element => {
         message: "Error",
         description: error.response.data.message,
       })
+      form.resetFields()
     },
   })
 
   const onSubmit: FormProps<IUpdateUserPayload>["onFinish"] = (values): void =>
     updateProfile(values)
 
-  useEffect(() => {
-    if (data) {
+  useEffect((): void => {
+    if (data)
       form.setFieldsValue({
         name: data.name,
         email: data.email,
         phoneNumber: data.phoneNumber,
         address: data.address,
       })
-    }
   }, [data, form])
 
   return (
@@ -153,7 +153,7 @@ const Profile: React.FC = (): JSX.Element => {
         confirmLoading={isPending}
         onOk={(): void => form.submit()}
         closable={{ "aria-label": "Custom Close Button" }}
-        onCancel={() => setOpenModal(false)}
+        onCancel={(): void => setOpenModal(false)}
       >
         <Form
           form={form}
