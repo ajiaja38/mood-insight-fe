@@ -197,7 +197,7 @@ const Disorder: React.FC = (): JSX.Element => {
     if (!col.editable) return col
     return {
       ...col,
-      onCell: (record: IGetDisorder) =>
+      onCell: (record: IGetDisorder): React.HTMLAttributes<HTMLElement> =>
         ({
           record,
           editable: true,
