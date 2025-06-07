@@ -39,27 +39,27 @@ const Sidebar: React.FC<props> = ({ collapsed }): JSX.Element => {
 
   const itemAdmin: MenuItem[] = [
     {
-      key: "/users",
+      key: "/dashboard/users",
       icon: <TeamOutlined />,
       label: "Pengguna",
     },
     {
-      key: "/penyakit",
+      key: "/dashboard/penyakit",
       icon: <ExperimentOutlined />,
       label: "Penyakit",
     },
     {
-      key: "/gejala",
+      key: "/dashboard/gejala",
       icon: <ForkOutlined />,
       label: "Gejala",
     },
     {
-      key: "/knowledge-base",
+      key: "/dashboard/knowledge-base",
       icon: <ReadOutlined />,
       label: "Basis Pengetahuan",
     },
     {
-      key: "/solusi",
+      key: "/dashboard/solusi",
       icon: <SafetyCertificateOutlined />,
       label: "Solusi",
     },
@@ -78,19 +78,19 @@ const Sidebar: React.FC<props> = ({ collapsed }): JSX.Element => {
       label: "konsultasi",
       children: [
         {
-          key: "/konsultasi",
+          key: "/dashboard/konsultasi",
           label: "Cek Depresi",
           icon: <MedicineBoxOutlined />,
         },
         {
-          key: "/hasil-diagnosa",
+          key: "/dashboard/hasil-diagnosa",
           label: "Hasil Diagnosa",
           icon: <ExceptionOutlined />,
         },
       ],
     },
     {
-      key: "/profile",
+      key: "/dashboard/profile",
       icon: <UserOutlined />,
       label: "Profile",
     },
@@ -161,7 +161,7 @@ const Sidebar: React.FC<props> = ({ collapsed }): JSX.Element => {
                 cancelText: "Batal",
                 onOk: () => {
                   auth.logout()
-                  navigate("/login")
+                  navigate("/auth/login")
                 },
               })
             }}

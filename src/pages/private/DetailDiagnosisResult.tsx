@@ -82,7 +82,7 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <UseTitle title="Detail Diagnosis Result" />
+      <UseTitle title="Detail Diagnosa" />
       <BreadCrumb
         items={[
           { title: "Konsultasi" },

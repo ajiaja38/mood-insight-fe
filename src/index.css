@@ -13,4 +13,6 @@
   --color-quaternary: #95efce;
   --color-quinary: #152744;
   --color-senary: #2ea1d9;
+
+  --breakpoint-3xl: 97rem;
 }

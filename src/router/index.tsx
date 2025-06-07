@@ -16,79 +16,48 @@ import KnowledgeBase from "../pages/private/KnowledgeBase"
 import Profile from "../pages/private/Profile"
 import Dashboard404 from "../pages/private/error"
 import DetailDiagnosisResult from "../pages/private/DetailDiagnosisResult"
+import UserLayout from "../layout/UserLayout"
+import ConsultationUser from "../pages/common/ConsultationUser"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage />,
-    },
-    {
-      path: "",
-      element: <AuthenticationLayout />,
+      element: <UserLayout />,
       children: [
-        {
-          path: "/login",
-          element: <LoginPage />,
-        },
-        {
-          path: "/register",
-          element: <RegisterPage />,
-        },
+        { path: "", element: <LandingPage /> },
+        { path: "konsultasi-pengguna", element: <ConsultationUser /> },
+        { path: "*", element: <Dashboard404 /> },
       ],
     },
     {
-      path: "",
-      element: <RouterGuard redirectPath="/login" />,
+      path: "/auth",
+      element: <AuthenticationLayout />,
+      children: [
+        { path: "login", element: <LoginPage /> },
+        { path: "register", element: <RegisterPage /> },
+        { path: "*", element: <Dashboard404 /> },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: <RouterGuard redirectPath="/auth/login" />,
       children: [
         {
           path: "",
           element: <DashboardLayout />,
           children: [
-            {
-              path: "/dashboard",
-              element: <DashboardHome />,
-            },
-            {
-              path: "/penyakit",
-              element: <Disorder />,
-            },
-            {
-              path: "/gejala",
-              element: <Symptom />,
-            },
-            {
-              path: "/konsultasi",
-              element: <Consultation />,
-            },
-            {
-              path: "/hasil-diagnosa",
-              element: <DiagnosisResult />,
-            },
-            {
-              path: "/hasil-diagnosa/:id",
-              element: <DetailDiagnosisResult />,
-            },
-            {
-              path: "/solusi",
-              element: <Solution />,
-            },
-            {
-              path: "/knowledge-base",
-              element: <KnowledgeBase />,
-            },
-            {
-              path: "/users",
-              element: <Users />,
-            },
-            {
-              path: "/profile",
-              element: <Profile />,
-            },
-            {
-              path: "*",
-              element: <Dashboard404 />,
-            },
+            { path: "", element: <DashboardHome /> },
+            { path: "penyakit", element: <Disorder /> },
+            { path: "gejala", element: <Symptom /> },
+            { path: "konsultasi", element: <Consultation /> },
+            { path: "hasil-diagnosa", element: <DiagnosisResult /> },
+            { path: "hasil-diagnosa/:id", element: <DetailDiagnosisResult /> },
+            { path: "solusi", element: <Solution /> },
+            { path: "knowledge-base", element: <KnowledgeBase /> },
+            { path: "users", element: <Users /> },
+            { path: "profile", element: <Profile /> },
+            { path: "*", element: <Dashboard404 /> },
           ],
         },
       ],

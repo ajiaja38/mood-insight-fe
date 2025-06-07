@@ -6,6 +6,7 @@ import type { ILoginPayload } from "../../types/interface/IAuth.interface"
 import { useAuth } from "../../hooks/useAuth"
 import type { IAuthContext } from "../../context/auth/AuthContext"
 import LocalStorageService from "../../service/localStorage.service"
+import { ERole } from "../../types/enum/ERole.enum"
 
 const LoginPage: React.FC = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -19,7 +20,10 @@ const LoginPage: React.FC = (): JSX.Element => {
     setLoading(true)
     setTimeout(async (): Promise<void> => {
       await auth.login(values)
-      navigate("/dashboard")
+
+      if (auth.getRole() === ERole.ADMIN) navigate("/dashboard")
+      if (auth.getRole() === ERole.USER) navigate("/")
+
       setLoading(false)
     }, 1500)
   }
@@ -59,7 +63,7 @@ const LoginPage: React.FC = (): JSX.Element => {
           <div className="flex flex-col gap-y-3">
             <p>
               Belum terdaftar?,
-              <NavLink to="/register"> Daftar disini</NavLink>
+              <NavLink to="/auth/register"> Daftar disini</NavLink>
             </p>
             <Button
               type="primary"

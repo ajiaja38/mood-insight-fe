@@ -67,7 +67,7 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
       title: "Aksi",
       key: "action",
       render: (_, record): JSX.Element => (
-        <NavLink to={`/hasil-diagnosa/${record.id}`}>
+        <NavLink to={`/dashboard/hasil-diagnosa/${record.id}`}>
           <Button color="primary" variant="solid">
             Detail
           </Button>

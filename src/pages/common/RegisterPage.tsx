@@ -31,7 +31,7 @@ const RegisterPage: React.FC = (): JSX.Element => {
         message: "Sukses",
         description: "Pendaftaran berhasil, silahkan login!",
       })
-      navigate("/login")
+      navigate("/auth/login")
     },
     onError: (error: any): void =>
       notification.error({
@@ -133,7 +133,7 @@ const RegisterPage: React.FC = (): JSX.Element => {
           <div className="flex flex-col gap-y-3">
             <p>
               Sudah terdaftar?,
-              <NavLink to="/login"> Login disini</NavLink>
+              <NavLink to="/auth/login"> Login disini</NavLink>
             </p>
             <Button
               type="primary"
