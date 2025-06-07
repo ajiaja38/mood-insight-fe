@@ -43,15 +43,15 @@ const Navbar: React.FC = (): JSX.Element => {
   const itemsNav: MenuProps["items"] = [
     {
       key: "home",
-      label: <div onClick={() => returnLocation()}>Home</div>,
+      label: <div onClick={() => returnLocation()}>Beranda</div>,
     },
     {
       key: "about",
-      label: <a>About</a>,
+      label: <a>Tentang</a>,
     },
     {
       key: "contact",
-      label: <a>contact</a>,
+      label: <a>Kontak</a>,
     },
     ...(isAuthenticated ? itemsNavAuthenticated : itemsNavNotAuthenticated),
   ]
@@ -106,9 +106,9 @@ const Navbar: React.FC = (): JSX.Element => {
         [&>li]:duration-300 
         [&>li]:hover:text-teal-600"
         >
-          <li onClick={() => returnLocation()}>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li onClick={() => returnLocation()}>Beranda</li>
+          <li>Tentang</li>
+          <li>Kontak</li>
         </ul>
         <div className="lg:flex lg:gap-x-1 hidden">
           <NavLink to="/auth/login" hidden={isAuthenticated}>
