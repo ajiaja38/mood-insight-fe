@@ -11,8 +11,8 @@ const Jumbotron: React.FC = (): JSX.Element => {
   const [banner] = useState<string[]>([Banner1, Banner2, Banner3, Banner4])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-10 md:mt-32">
-      <div className="flex flex-col justify-center gap-7 w-full h-96 md:h-full text-center md:text-left">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 w-full mb-10 lg:mb-20">
+      <div className="flex flex-col justify-center gap-7 w-full h-full text-center md:text-left">
         <h1 className="text-5xl md:text-7xl font-semibold">
           Find Your Path to Emotional Wellness Today
         </h1>

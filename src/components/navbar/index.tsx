@@ -1,7 +1,12 @@
 import React, { useEffect, useState, type JSX } from "react"
 import { MoodInsightLogo } from "../../utils/constant/staticFile"
 import { App, Button, Dropdown, type MenuProps } from "antd"
-import { NavLink, useNavigate } from "react-router-dom"
+import {
+  NavLink,
+  useLocation,
+  useNavigate,
+  type NavigateFunction,
+} from "react-router-dom"
 import { MenuOutlined } from "@ant-design/icons/lib/icons"
 import { useAuth } from "../../hooks/useAuth"
 
@@ -10,7 +15,8 @@ const Navbar: React.FC = (): JSX.Element => {
 
   const { isAuthenticated, logout } = useAuth()
   const { modal } = App.useApp()
-  const navigate = useNavigate()
+  const navigate: NavigateFunction = useNavigate()
+  const location = useLocation()
 
   const itemsNavAuthenticated: MenuProps["items"] = [
     {
@@ -37,7 +43,7 @@ const Navbar: React.FC = (): JSX.Element => {
   const itemsNav: MenuProps["items"] = [
     {
       key: "home",
-      label: <NavLink to="/">Home</NavLink>,
+      label: <div onClick={() => returnLocation()}>Home</div>,
     },
     {
       key: "about",
@@ -68,6 +74,9 @@ const Navbar: React.FC = (): JSX.Element => {
     })
   }
 
+  const returnLocation: () => void | Promise<void> = () =>
+    location.pathname === "/" ? window.scrollTo(0, 0) : navigate("/")
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0)
@@ -83,7 +92,7 @@ const Navbar: React.FC = (): JSX.Element => {
         isScrolled ? "border-b border-gray-100" : "border-none"
       }`}
     >
-      <div className="flex py-3 md:py-5 lg:px-9 3xl:px-0 w-full justify-between items-center container mx-auto">
+      <div className="flex p-4 md:py-5 lg:px-9 3xl:px-0 w-full justify-between items-center container mx-auto">
         <NavLink to="/" className="flex items-center gap-x-2 cursor-pointer">
           <img src={MoodInsightLogo} alt="Mood Insight" className="w-6 h-6" />
           <h1 className="font-extrabold text-teal-600 text-2xl hidden md:block">
@@ -97,7 +106,7 @@ const Navbar: React.FC = (): JSX.Element => {
         [&>li]:duration-300 
         [&>li]:hover:text-teal-600"
         >
-          <li onClick={() => navigate("/")}>Home</li>
+          <li onClick={() => returnLocation()}>Home</li>
           <li>About</li>
           <li>Contact</li>
         </ul>
@@ -125,7 +134,7 @@ const Navbar: React.FC = (): JSX.Element => {
         <div className="lg:hidden">
           <Dropdown
             menu={{ items: itemsNav }}
-            placement="bottomRight"
+            placement="bottomLeft"
             arrow={{ pointAtCenter: true }}
           >
             <Button type="primary" icon={<MenuOutlined />} />
