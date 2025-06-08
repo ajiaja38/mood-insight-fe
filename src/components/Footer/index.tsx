@@ -18,7 +18,7 @@ const Footer: React.FC = (): JSX.Element => {
             </div>
             <h1 className="text-3xl lg:text-5xl font-bold">Mood Insight</h1>
           </div>
-          <p className="text-justify font-extralight">
+          <p className="text-justify font-extralight lg:text-xl">
             Mood insight adalah pusat kesehatan mental yang penuh kasih dan
             holistik yang didedikasikan untuk memberikan perawatan yang
             dipersonalisasi bagi individu yang mencari kesejahteraan emosional
@@ -34,7 +34,7 @@ const Footer: React.FC = (): JSX.Element => {
         <div className=" p-4 grid grid-cols-3 gap-5">
           <ul>
             <li>
-              <h2 className="font-bold text-xl mb-3">Company</h2>
+              <h2 className="font-bold lg:text-xl mb-3">Company</h2>
             </li>
             <div className="flex flex-col gap-y-1.5 [&>li]:hover:text-gray-300 text-xs md:text-base">
               <li className="cursor-pointer">Tentang Kami</li>
@@ -46,7 +46,7 @@ const Footer: React.FC = (): JSX.Element => {
           </ul>
           <ul>
             <li>
-              <h2 className="font-bold text-xl mb-3">Dukungan</h2>
+              <h2 className="font-bold lg:text-xl mb-3">Dukungan</h2>
             </li>
             <div className="flex flex-col gap-y-1.5 [&>li]:hover:text-gray-300 text-xs md:text-base">
               <li className="cursor-pointer">Layanan Kami</li>
@@ -56,7 +56,7 @@ const Footer: React.FC = (): JSX.Element => {
           </ul>
           <ul>
             <li>
-              <h2 className="font-bold text-xl mb-3">Terhubung</h2>
+              <h2 className="font-bold lg:text-xl mb-3">Terhubung</h2>
             </li>
             <div className="flex flex-col gap-y-1.5 [&>li]:hover:text-gray-300 text-xs md:text-base">
               <li className="cursor-pointer">Notifikasi Email</li>

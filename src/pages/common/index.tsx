@@ -2,6 +2,7 @@ import React, { useEffect, type JSX } from "react"
 import Jumbotron from "../../components/Jumbotron"
 import Statistic from "../../components/Statistic"
 import CallToAction from "../../components/CallToAction"
+import WhyChooseUs from "../../components/WhyChooseUs"
 
 const LandingPage: React.FC = (): JSX.Element => {
   useEffect(() => {
@@ -12,6 +13,7 @@ const LandingPage: React.FC = (): JSX.Element => {
     <>
       <Jumbotron />
       <Statistic />
+      <WhyChooseUs />
       <CallToAction />
     </>
   )
