@@ -255,6 +255,13 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
           isAdd={true}
           callback={handleOpenModal}
         />
+        <div>
+          <p className="font-bold">
+            Data Basis Pengetahuan di buat oleh psikolog:
+          </p>
+          <p>Nama: Azola Arcilia Fajuita</p>
+          <p>Nomor Telepon: +62 813-3145-4133</p>
+        </div>
       </Container>
       <Modal
         title="Tambah Data Basis Pengetahuan"
