@@ -95,7 +95,7 @@ const Navbar: React.FC = (): JSX.Element => {
       <div className="flex p-4 md:py-5 lg:px-9 3xl:px-0 w-full justify-between items-center container mx-auto">
         <NavLink to="/" className="flex items-center gap-x-2 cursor-pointer">
           <img src={MoodInsightLogo} alt="Mood Insight" className="w-6 h-6" />
-          <h1 className="font-extrabold text-teal-600 text-2xl hidden md:block">
+          <h1 className="font-extrabold text-teal-600 text-2xl">
             Mood Insight
           </h1>
         </NavLink>
@@ -118,7 +118,7 @@ const Navbar: React.FC = (): JSX.Element => {
             <Button type="text">Daftar</Button>
           </NavLink>
           <NavLink to="/konsultasi-pengguna" hidden={!isAuthenticated}>
-            <Button variant="solid" color="yellow">
+            <Button variant="solid" color="primary">
               Konsultasi
             </Button>
           </NavLink>

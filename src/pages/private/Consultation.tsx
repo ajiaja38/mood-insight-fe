@@ -49,7 +49,7 @@ const Consultation: React.FC = (): JSX.Element => {
       return response
     },
     onSuccess: (response: IResCreateConsultation): void | Promise<void> =>
-      navigate(`/hasil-diagnosa/${response.consultationId}`),
+      navigate(`/dashboard/hasil-diagnosa/${response.consultationId}`),
     onError: (error: any): void =>
       notification.error({
         message: "Error",

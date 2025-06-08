@@ -1,8 +1,37 @@
 import React, { type JSX } from "react"
+import { motion, type Variants } from "framer-motion"
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: "backInOut",
+    },
+  },
+}
 
 const Statistic: React.FC = (): JSX.Element => {
   return (
-    <div className="bg-slate-100 p-10 md:p-16 lg:p-28 absolute inset-x-0">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      variants={containerVariants}
+      viewport={{ once: false, amount: 0.3 }}
+      className="bg-slate-100 p-10 md:p-16 lg:p-28 absolute inset-x-0"
+    >
       <div className="container mx-auto flex flex-col gap-11 md:gap-0 md:flex-row md:justify-around">
         <StatisticInfo
           title="1000+"
@@ -20,7 +49,7 @@ const Statistic: React.FC = (): JSX.Element => {
           subtitle2="Center"
         />
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -30,13 +59,16 @@ const StatisticInfo: React.FC<{
   subtitle2: string
 }> = ({ title, subtitle1, subtitle2 }) => {
   return (
-    <div className="flex justify-center items-center flex-col md:grid md:grid-cols-2 gap-3">
+    <motion.div
+      variants={itemVariants}
+      className="flex justify-center items-center flex-col md:grid md:grid-cols-2 gap-3"
+    >
       <h3 className="font-bold text-4xl lg:text-5xl">{title}</h3>
-      <p className="flex flex-row md:flex-col text-gray-500">
+      <p className="flex flex-row md:flex-col text-gray-500 text-lg">
         <span>{subtitle1}</span>
         <span>{subtitle2}</span>
       </p>
-    </div>
+    </motion.div>
   )
 }
 

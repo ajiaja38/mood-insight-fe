@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react"
+import React, { useState, useEffect, type JSX } from "react"
 import { Button } from "antd"
 import {
   Banner1,
@@ -9,16 +9,29 @@ import {
 import { ForkOutlined } from "@ant-design/icons/lib/icons"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate, type NavigateFunction } from "react-router-dom"
+import { motion } from "framer-motion"
 
 const Jumbotron: React.FC = (): JSX.Element => {
   const [banner] = useState<string[]>([Banner1, Banner2, Banner3, Banner4])
-
   const { isAuthenticated } = useAuth()
   const navigate: NavigateFunction = useNavigate()
 
+  const [offsetY, setOffsetY] = useState(0)
+  const handleScroll = () => setOffsetY(window.scrollY)
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 w-full mb-10 lg:mb-20">
-      <div className="flex flex-col justify-center gap-7 w-full h-full text-center md:text-left">
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        className="flex flex-col justify-center gap-7 w-full h-full text-center md:text-left"
+      >
         <h1 className="text-3xl md:text-5xl font-semibold">
           Wujudkan kesehatan emosional Anda, mulai sekarang.
         </h1>
@@ -42,8 +55,14 @@ const Jumbotron: React.FC = (): JSX.Element => {
             Konsultasi Sekarang!
           </Button>
         </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4 md:gap-6 w-full">
+      </motion.div>
+
+      <motion.div
+        style={{
+          translateY: offsetY * +0.3,
+        }}
+        className="grid grid-cols-2 gap-4 md:gap-6 w-full"
+      >
         {banner.map((item, index) => (
           <img
             key={index}
@@ -52,7 +71,7 @@ const Jumbotron: React.FC = (): JSX.Element => {
             className="w-full md:h-80 rounded-4xl object-cover"
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
