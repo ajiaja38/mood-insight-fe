@@ -19,6 +19,8 @@ import DetailDiagnosisResult from "../pages/private/DetailDiagnosisResult"
 import UserLayout from "../layout/UserLayout"
 import ConsultationUser from "../pages/common/ConsultationUser"
 import DetailConsultationUser from "../pages/common/DetailConsultationUser"
+import HistoryConsultation from "../pages/common/HistoryConsultation"
+import ProfilUser from "../pages/common/ProfilUser"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -36,6 +38,8 @@ export const router: ReturnType<typeof createBrowserRouter> =
               path: "detail-konsultasi/:id",
               element: <DetailConsultationUser />,
             },
+            { path: "riwayat", element: <HistoryConsultation /> },
+            { path: "profile-pengguna", element: <ProfilUser /> },
           ],
         },
         { path: "*", element: <Dashboard404 /> },

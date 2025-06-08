@@ -111,7 +111,15 @@ const Navbar: React.FC = (): JSX.Element => {
         >
           <li onClick={() => returnLocation()}>Beranda</li>
           <li>Tentang</li>
-          <li>Kontak</li>
+          <li hidden={!isAuthenticated} onClick={() => navigate("/riwayat")}>
+            Riwayat
+          </li>
+          <li
+            hidden={!isAuthenticated}
+            onClick={() => navigate("/profile-pengguna")}
+          >
+            Profile
+          </li>
         </ul>
         <div className="lg:flex lg:gap-x-1 hidden">
           <NavLink to="/auth/login" hidden={isAuthenticated}>
