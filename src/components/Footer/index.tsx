@@ -9,7 +9,7 @@ import { MoodInsightLogo } from "../../utils/constant/staticFile"
 
 const Footer: React.FC = (): JSX.Element => {
   return (
-    <footer className="bg-primary p-10 md:p-16 lg:p-28 text-white">
+    <footer className="bg-primary p-8 md:p-16 lg:p-24 text-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 container mx-auto">
         <div className="p-4 w-full lg:w-[80%] flex flex-col gap-y-5">
           <div className="flex gap-x-3 items-center">

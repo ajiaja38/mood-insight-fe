@@ -34,16 +34,20 @@ const Statistic: React.FC = (): JSX.Element => {
       className="bg-slate-100 p-10 md:p-16 lg:p-28 relative z-50"
       style={{ scrollMarginTop: "4rem" }}
     >
-      <div className="container mx-auto flex flex-col gap-11 md:gap-0 md:flex-row md:justify-around">
+      <div className="container mx-auto flex flex-col gap-11 md:gap-0 lg:flex-row lg:justify-around">
         <StatisticInfo
           title="1000+"
-          subtitle1="Perbaikan"
+          subtitle1="Perbaikan "
           subtitle2="Kesehatan Mental"
         />
-        <StatisticInfo title="95%" subtitle1="Kepuasan" subtitle2="Pelanggan" />
+        <StatisticInfo
+          title="95%"
+          subtitle1="Kepuasan "
+          subtitle2="Pelanggan"
+        />
         <StatisticInfo
           title="Top 10"
-          subtitle1="Pusat"
+          subtitle1="Pusat "
           subtitle2="Kesehatan Mental"
         />
       </div>
@@ -59,10 +63,10 @@ const StatisticInfo: React.FC<{
   return (
     <motion.div
       variants={itemVariants}
-      className="flex justify-center items-center flex-col md:grid md:grid-cols-2 gap-3"
+      className="flex justify-center items-center flex-col lg:grid lg:grid-cols-2 lg:gap-3"
     >
       <h3 className="font-bold text-4xl lg:text-5xl">{title}</h3>
-      <p className="flex flex-row md:flex-col text-gray-500 text-lg">
+      <p className="flex flex-row gap-x-1 lg:flex-col text-gray-500 text-lg md:mb-2 lg:mb-0">
         <span>{subtitle1}</span>
         <span>{subtitle2}</span>
       </p>
