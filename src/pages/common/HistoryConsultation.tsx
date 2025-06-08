@@ -29,15 +29,6 @@ const HistoryConsultation: React.FC = (): JSX.Element => {
 
   const columns: TableProps<IConsultation>["columns"] = [
     {
-      title: "Nama Pengguna",
-      dataIndex: "user",
-      key: "user",
-      sorter: (a, b): number => a.user.localeCompare(b.user),
-      ellipsis: {
-        showTitle: false,
-      },
-    },
-    {
       title: "Hasil",
       dataIndex: "result",
       key: "result",
