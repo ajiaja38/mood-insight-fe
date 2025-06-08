@@ -88,17 +88,20 @@ const Navbar: React.FC = (): JSX.Element => {
 
   return (
     <div
-      className={`fixed inset-x-0 top-0 bg-white/50 backdrop-blur-lg z-50 ${
+      className={`fixed inset-x-0 top-0 bg-white/50 backdrop-blur-lg z-[99] ${
         isScrolled ? "border-b border-gray-100" : "border-none"
       }`}
     >
       <div className="flex p-4 md:py-5 lg:px-9 3xl:px-0 w-full justify-between items-center container mx-auto">
-        <NavLink to="/" className="flex items-center gap-x-2 cursor-pointer">
+        <div
+          onClick={() => returnLocation()}
+          className="flex items-center gap-x-2 cursor-pointer"
+        >
           <img src={MoodInsightLogo} alt="Mood Insight" className="w-6 h-6" />
           <h1 className="font-extrabold text-teal-600 text-2xl">
             Mood Insight
           </h1>
-        </NavLink>
+        </div>
         <ul
           className="hidden lg:flex gap-x-6 
         [&>li]:cursor-pointer

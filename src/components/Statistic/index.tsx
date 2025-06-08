@@ -26,27 +26,25 @@ const itemVariants: Variants = {
 const Statistic: React.FC = (): JSX.Element => {
   return (
     <motion.div
+      id="statistic"
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
       viewport={{ once: false, amount: 0.3 }}
-      className="bg-slate-100 p-10 md:p-16 lg:p-28 absolute inset-x-0"
+      className="bg-slate-100 p-10 md:p-16 lg:p-28 relative z-50"
+      style={{ scrollMarginTop: "4rem" }}
     >
       <div className="container mx-auto flex flex-col gap-11 md:gap-0 md:flex-row md:justify-around">
         <StatisticInfo
           title="1000+"
-          subtitle1="Lives"
-          subtitle2="Transformed"
+          subtitle1="Perbaikan"
+          subtitle2="Kesehatan Mental"
         />
-        <StatisticInfo
-          title="95%"
-          subtitle1="Client"
-          subtitle2="Satisfaction"
-        />
+        <StatisticInfo title="95%" subtitle1="Kepuasan" subtitle2="Pelanggan" />
         <StatisticInfo
           title="Top 10"
-          subtitle1="Mental Health"
-          subtitle2="Center"
+          subtitle1="Pusat"
+          subtitle2="Kesehatan Mental"
         />
       </div>
     </motion.div>

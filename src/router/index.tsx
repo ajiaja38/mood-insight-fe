@@ -26,7 +26,13 @@ export const router: ReturnType<typeof createBrowserRouter> =
       element: <UserLayout />,
       children: [
         { path: "", element: <LandingPage /> },
-        { path: "konsultasi-pengguna", element: <ConsultationUser /> },
+        {
+          path: "",
+          element: <RouterGuard redirectPath="/" />,
+          children: [
+            { path: "konsultasi-pengguna", element: <ConsultationUser /> },
+          ],
+        },
         { path: "*", element: <Dashboard404 /> },
       ],
     },

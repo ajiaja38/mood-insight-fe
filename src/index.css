@@ -20,3 +20,7 @@
 
   --breakpoint-3xl: 97rem;
 }
+
+.content-padding {
+  @apply p-4 lg:px-9 3xl:px-0;
+}

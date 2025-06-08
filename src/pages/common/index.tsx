@@ -1,6 +1,7 @@
 import React, { useEffect, type JSX } from "react"
 import Jumbotron from "../../components/Jumbotron"
 import Statistic from "../../components/Statistic"
+import CallToAction from "../../components/CallToAction"
 
 const LandingPage: React.FC = (): JSX.Element => {
   useEffect(() => {
@@ -8,10 +9,11 @@ const LandingPage: React.FC = (): JSX.Element => {
   }, [])
 
   return (
-    <div>
+    <>
       <Jumbotron />
       <Statistic />
-    </div>
+      <CallToAction />
+    </>
   )
 }
 

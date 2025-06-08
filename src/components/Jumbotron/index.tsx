@@ -6,17 +6,12 @@ import {
   Banner3,
   Banner4,
 } from "../../utils/constant/staticFile"
-import { ForkOutlined } from "@ant-design/icons/lib/icons"
-import { useAuth } from "../../hooks/useAuth"
-import { useNavigate, type NavigateFunction } from "react-router-dom"
+import { PushpinOutlined } from "@ant-design/icons/lib/icons"
 import { motion } from "framer-motion"
 
 const Jumbotron: React.FC = (): JSX.Element => {
-  const [offsetY, setOffsetY] = useState<number>(0)
-
   const [banner] = useState<string[]>([Banner1, Banner2, Banner3, Banner4])
-  const { isAuthenticated } = useAuth()
-  const navigate: NavigateFunction = useNavigate()
+  const [offsetY, setOffsetY] = useState<number>(0)
 
   const handleScroll = () => setOffsetY(window.scrollY)
 
@@ -26,7 +21,7 @@ const Jumbotron: React.FC = (): JSX.Element => {
   }, [])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 w-full mb-10 lg:mb-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 w-full mb-10 lg:mb-20 content-padding container mx-auto">
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
@@ -43,25 +38,23 @@ const Jumbotron: React.FC = (): JSX.Element => {
           Kami di sini untuk jadi tempat yang nyaman dan suportif buat kamu yang
           ingin sembuh secara mental dan emosional.
         </p>
-        <div>
+        <a href="#statistic">
           <Button
             variant="solid"
             color="primary"
             size="large"
             style={{ fontSize: "1.5rem", padding: "1.5rem" }}
-            icon={<ForkOutlined />}
-            onClick={() =>
-              isAuthenticated
-                ? navigate("/konsultasi-pengguna")
-                : navigate("/auth/login")
-            }
+            icon={<PushpinOutlined />}
           >
-            Konsultasi Sekarang!
+            Selengkapnya
           </Button>
-        </div>
+        </a>
       </motion.div>
 
       <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
         style={{
           translateY: offsetY * 0.3,
         }}
