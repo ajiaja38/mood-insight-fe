@@ -47,7 +47,7 @@ const Navbar: React.FC = (): JSX.Element => {
     },
     {
       key: "about",
-      label: <a>Tentang</a>,
+      label: <div onClick={() => handleAboutClick()}>Tentang</div>,
     },
     {
       key: "contact",
@@ -76,6 +76,9 @@ const Navbar: React.FC = (): JSX.Element => {
 
   const returnLocation: () => void | Promise<void> = () =>
     location.pathname === "/" ? window.scrollTo(0, 0) : navigate("/")
+
+  const handleAboutClick = () =>
+    navigate("/", { state: { scrollTo: "statistic" } })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +113,7 @@ const Navbar: React.FC = (): JSX.Element => {
         [&>li]:hover:text-teal-600"
         >
           <li onClick={() => returnLocation()}>Beranda</li>
-          <li>Tentang</li>
+          <li onClick={() => handleAboutClick()}>Tentang</li>
           <li hidden={!isAuthenticated} onClick={() => navigate("/riwayat")}>
             Riwayat
           </li>
