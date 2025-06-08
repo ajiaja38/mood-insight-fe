@@ -88,6 +88,10 @@ const ProfilUser: React.FC = (): JSX.Element => {
       })
   }, [data, form])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <div className="bg-gray-100 content-padding">
