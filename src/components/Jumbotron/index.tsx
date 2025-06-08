@@ -12,11 +12,12 @@ import { useNavigate, type NavigateFunction } from "react-router-dom"
 import { motion } from "framer-motion"
 
 const Jumbotron: React.FC = (): JSX.Element => {
+  const [offsetY, setOffsetY] = useState<number>(0)
+
   const [banner] = useState<string[]>([Banner1, Banner2, Banner3, Banner4])
   const { isAuthenticated } = useAuth()
   const navigate: NavigateFunction = useNavigate()
 
-  const [offsetY, setOffsetY] = useState(0)
   const handleScroll = () => setOffsetY(window.scrollY)
 
   useEffect(() => {
@@ -31,6 +32,9 @@ const Jumbotron: React.FC = (): JSX.Element => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         className="flex flex-col justify-center gap-7 w-full h-full text-center md:text-left"
+        style={{
+          translateY: offsetY * -0.3,
+        }}
       >
         <h1 className="text-3xl md:text-5xl font-semibold">
           Wujudkan kesehatan emosional Anda, mulai sekarang.
@@ -59,7 +63,7 @@ const Jumbotron: React.FC = (): JSX.Element => {
 
       <motion.div
         style={{
-          translateY: offsetY * +0.3,
+          translateY: offsetY * 0.3,
         }}
         className="grid grid-cols-2 gap-4 md:gap-6 w-full"
       >
