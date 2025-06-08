@@ -21,6 +21,8 @@ import ConsultationUser from "../pages/common/ConsultationUser"
 import DetailConsultationUser from "../pages/common/DetailConsultationUser"
 import HistoryConsultation from "../pages/common/HistoryConsultation"
 import ProfilUser from "../pages/common/ProfilUser"
+import RoleGuard from "./guard/RoleGuard"
+import { ERole } from "../types/enum/ERole.enum"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -60,19 +62,28 @@ export const router: ReturnType<typeof createBrowserRouter> =
       children: [
         {
           path: "",
-          element: <DashboardLayout />,
+          element: <RoleGuard role={ERole.ADMIN} redirectPath="/" />,
           children: [
-            { path: "", element: <DashboardHome /> },
-            { path: "penyakit", element: <Disorder /> },
-            { path: "gejala", element: <Symptom /> },
-            { path: "konsultasi", element: <Consultation /> },
-            { path: "hasil-diagnosa", element: <DiagnosisResult /> },
-            { path: "hasil-diagnosa/:id", element: <DetailDiagnosisResult /> },
-            { path: "solusi", element: <Solution /> },
-            { path: "knowledge-base", element: <KnowledgeBase /> },
-            { path: "users", element: <Users /> },
-            { path: "profile", element: <Profile /> },
-            { path: "*", element: <Dashboard404 /> },
+            {
+              path: "",
+              element: <DashboardLayout />,
+              children: [
+                { path: "", element: <DashboardHome /> },
+                { path: "penyakit", element: <Disorder /> },
+                { path: "gejala", element: <Symptom /> },
+                { path: "konsultasi", element: <Consultation /> },
+                { path: "hasil-diagnosa", element: <DiagnosisResult /> },
+                {
+                  path: "hasil-diagnosa/:id",
+                  element: <DetailDiagnosisResult />,
+                },
+                { path: "solusi", element: <Solution /> },
+                { path: "knowledge-base", element: <KnowledgeBase /> },
+                { path: "users", element: <Users /> },
+                { path: "profile", element: <Profile /> },
+                { path: "*", element: <Dashboard404 /> },
+              ],
+            },
           ],
         },
       ],
