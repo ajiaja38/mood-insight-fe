@@ -20,6 +20,14 @@ const Navbar: React.FC = (): JSX.Element => {
 
   const itemsNavAuthenticated: MenuProps["items"] = [
     {
+      key: "history",
+      label: <NavLink to="/riwayat">Riwayat</NavLink>,
+    },
+    {
+      key: "profile",
+      label: <NavLink to="/profile-pengguna">Profile</NavLink>,
+    },
+    {
       key: "consultation",
       label: <NavLink to="/konsultasi-pengguna">Konsultasi</NavLink>,
     },
@@ -48,10 +56,6 @@ const Navbar: React.FC = (): JSX.Element => {
     {
       key: "about",
       label: <div onClick={() => handleAboutClick()}>Tentang</div>,
-    },
-    {
-      key: "contact",
-      label: <a>Kontak</a>,
     },
     ...(isAuthenticated ? itemsNavAuthenticated : itemsNavNotAuthenticated),
   ]
