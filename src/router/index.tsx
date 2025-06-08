@@ -18,6 +18,7 @@ import Dashboard404 from "../pages/private/error"
 import DetailDiagnosisResult from "../pages/private/DetailDiagnosisResult"
 import UserLayout from "../layout/UserLayout"
 import ConsultationUser from "../pages/common/ConsultationUser"
+import DetailConsultationUser from "../pages/common/DetailConsultationUser"
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -31,6 +32,10 @@ export const router: ReturnType<typeof createBrowserRouter> =
           element: <RouterGuard redirectPath="/" />,
           children: [
             { path: "konsultasi-pengguna", element: <ConsultationUser /> },
+            {
+              path: "detail-konsultasi/:id",
+              element: <DetailConsultationUser />,
+            },
           ],
         },
         { path: "*", element: <Dashboard404 /> },

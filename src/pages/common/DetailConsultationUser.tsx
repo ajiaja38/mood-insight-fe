@@ -1,21 +1,20 @@
-import React, { type JSX } from "react"
+import React, { useEffect, type JSX } from "react"
 import UseTitle from "../../hooks/useTitle"
-import BreadCrumb from "../../components/Breadcumb"
 import { useParams } from "react-router-dom"
-import { App } from "antd"
 import { useQuery } from "@tanstack/react-query"
+import { App } from "antd"
 import type { IDetailConsultation } from "../../types/interface/IConsultation.interface"
 import { ConsultationService } from "../../service/consultation.service"
 import SkeletonDetailDiagnosis from "../../components/skeleton/SkeletonDetailDiagnosis"
 import DiagnosisResult from "../../components/DiagnosisResult"
 
-const DetailDiagnosisResult: React.FC = (): JSX.Element => {
+const DetailConsultationUser: React.FC = (): JSX.Element => {
   const { id } = useParams()
 
   const { notification } = App.useApp()
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["detail-diagnosis-result", id],
+    queryKey: ["detail-diagnosis-result-user", id],
     queryFn: async (): Promise<IDetailConsultation> => {
       const response: Promise<IDetailConsultation> =
         ConsultationService.getDetailConsultation(id as string).then(
@@ -39,24 +38,31 @@ const DetailDiagnosisResult: React.FC = (): JSX.Element => {
     data?.diagnosisResult[0]
   )
 
-  if (isLoading) return <SkeletonDetailDiagnosis />
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="bg-gray-100 content-padding">
+        <div className="container mx-auto">
+          <SkeletonDetailDiagnosis />
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <>
-      <UseTitle title="Detail Diagnosa" />
-      <BreadCrumb
-        items={[
-          { title: "Konsultasi" },
-          { title: "Hasil Diagnosa" },
-          { title: id as string },
-        ]}
-      />
-      <DiagnosisResult
-        data={data}
-        highestBeliefDiagnosis={highestBeliefDiagnosis}
-      />
-    </>
+    <div className="bg-gray-100 content-padding">
+      <UseTitle title={`Detail Konsultasi ${id}`} />
+      <div className="container mx-auto">
+        <DiagnosisResult
+          data={data}
+          highestBeliefDiagnosis={highestBeliefDiagnosis}
+        />
+      </div>
+    </div>
   )
 }
 
-export default DetailDiagnosisResult
+export default DetailConsultationUser

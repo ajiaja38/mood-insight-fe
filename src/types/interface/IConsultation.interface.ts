@@ -27,7 +27,7 @@ interface disorder {
   name: string
 }
 
-interface diagnosisResult {
+export interface diagnosisResult {
   id: string
   belief_value: number
   plausability_value: number

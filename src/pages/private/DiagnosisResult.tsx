@@ -30,12 +30,6 @@ const DiagnosisResult: React.FC = (): JSX.Element => {
 
   const columns: TableProps<IConsultation>["columns"] = [
     {
-      title: "ID Konsultasi",
-      dataIndex: "id",
-      key: "id",
-      sorter: (a, b): number => a.id.localeCompare(b.id),
-    },
-    {
       title: "Nama Pengguna",
       dataIndex: "user",
       key: "user",
