@@ -18,14 +18,17 @@ const LoginPage: React.FC = (): JSX.Element => {
     values: ILoginPayload
   ) => {
     setLoading(true)
-    setTimeout(async (): Promise<void> => {
+    try {
+      setTimeout(async (): Promise<void> => {}, 1500)
       await auth.login(values)
 
       if (auth.getRole() === ERole.ADMIN) navigate("/dashboard")
       if (auth.getRole() === ERole.USER) navigate("/")
-
+    } catch (error) {
+      console.error(error)
+    } finally {
       setLoading(false)
-    }, 1500)
+    }
   }
 
   useEffect((): void => LocalStorageService.remove(), [])
