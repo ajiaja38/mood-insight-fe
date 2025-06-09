@@ -313,7 +313,11 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
               },
             ]}
           >
-            <Select placeholder="Pilih data gejala">
+            <Select
+              placeholder="Pilih data gejala"
+              getPopupContainer={(triggerNode) => triggerNode.parentNode}
+              virtual={false}
+            >
               {symptoms?.length
                 ? symptoms.map(
                     ({ id, symptom }: IGetSymptom): JSX.Element => (
@@ -335,7 +339,11 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
               },
             ]}
           >
-            <Select placeholder="Pilih bobot Basis Pengetahuan">
+            <Select
+              placeholder="Pilih bobot Basis Pengetahuan"
+              getPopupContainer={(triggerNode) => triggerNode.parentNode}
+              virtual={false}
+            >
               {DATA_WEIGHT.map(
                 (weight: number, index: number): JSX.Element => (
                   <Option key={index} value={weight}>
