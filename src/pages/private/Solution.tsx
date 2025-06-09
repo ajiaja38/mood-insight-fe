@@ -274,7 +274,7 @@ const Solution: React.FC = (): JSX.Element => {
             </Select>
           </Form.Item>
           <Form.Item<ICreateSolution>
-            label="Nama Gejala"
+            label="Solusi"
             name="solution"
             rules={[{ required: true, message: "Harap masukkan nama gejala!" }]}
           >
