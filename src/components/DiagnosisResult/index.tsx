@@ -100,6 +100,20 @@ const DiagnosisResult: React.FC<props> = ({
                 )}
               </div>
             </div>
+            <div className="flex flex-col">
+              <Typography.Title level={2}>Info Lebih Lengkap:</Typography.Title>
+              <div className="flex flex-col gap-3">
+                <p>
+                  {" "}
+                  Anda bisa menghubungi psikolog{" "}
+                  <span className="font-bold">Azola Arcilia Fajuita</span> pada
+                  nomor{" "}
+                  <a href="https://wa.me/6281331454133" target="_blank">
+                    +62-813-3145-4133
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
         </Container>
       </div>
