@@ -95,7 +95,7 @@ const Consultation: React.FC = (): JSX.Element => {
             if (!symptomIds.length)
               return notification.error({
                 message: "Error",
-                description: "Pilih gejala terlebih dahulu!",
+                description: "Pilih gejala depresi terlebih dahulu!",
               })
 
             mutate({ symptomIds })
