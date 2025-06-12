@@ -114,7 +114,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
     onSettled: (): void => setDeletedId(null),
   })
 
-  const handleOpenModal = () => setOpenModal(true)
+  const handleOpenModal = (): void => setOpenModal(true)
 
   const { mutate: createKnowledgeBase, isPending } = useMutation({
     mutationKey: ["createKnowledgeBase"],
@@ -143,8 +143,9 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
     onSettled: (): void => setDeletedId(null),
   })
 
-  const onSubmit: FormProps<ICreateKnowledgeBase>["onFinish"] = (values) =>
-    createKnowledgeBase(values)
+  const onSubmit: FormProps<ICreateKnowledgeBase>["onFinish"] = (
+    values
+  ): void => createKnowledgeBase(values)
 
   const { mutate: updateKnowledgeBase, isPending: isUpdatePending } =
     useMutation({
@@ -186,7 +187,8 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      sorter: (a, b): number => a.id.localeCompare(b.id),
+      sorter: (a: IGetKnowledgeBase, b: IGetKnowledgeBase): number =>
+        a.id.localeCompare(b.id),
     },
     {
       title: "Gejala",
