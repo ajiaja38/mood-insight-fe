@@ -138,7 +138,7 @@ const Profile: React.FC = (): JSX.Element => {
               {
                 pattern: /^\+62\d{9,13}$/,
                 message:
-                  "Nomor Telepon diawali dengan +62 dan terdiri dari 9-13 angka",
+                  "Nomor Telepon harus diawali dengan +62 dan terdiri dari 9-13 angka",
               },
             ]}
           >
