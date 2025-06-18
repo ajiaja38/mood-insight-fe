@@ -102,7 +102,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
     onSuccess: (): void => {
       notification.success({
         message: "Success",
-        description: "Basis Pengetahuan berhasil dihapus",
+        description: "Basis Pengetahuan telah dihapus",
       })
       queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
     },
