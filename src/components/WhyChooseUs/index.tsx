@@ -18,7 +18,7 @@ const items: WhyItemProps[] = [
     icon: <SafetyOutlined />,
     title: 'Disesuaikan untuk Anda',
     description:
-      'Kami menyediakan service yang disesuaikan untuk Anda, dengan fokus pada pemahaman dan penyembuhan akar penyebab tantangan kesehatan mental.',
+      'Kami menyediakan layanan yang disesuaikan untuk Anda, dengan fokus pada pemahaman dan penyembuhan akar penyebab tantangan kesehatan mental.',
   },
   {
     icon: <SisternodeOutlined />,
