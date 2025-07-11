@@ -1,15 +1,15 @@
-import React, { type JSX } from "react"
+import React, { type JSX } from 'react';
 import type {
   diagnosisResult,
   IDetailConsultation,
-} from "../../types/interface/IConsultation.interface"
-import Container from "../Content/Container"
-import { Timeline, Typography } from "antd"
-import { timeIdFormat } from "../../utils/pipe/timeIdFormat.pipe"
+} from '../../types/interface/IConsultation.interface';
+import Container from '../Content/Container';
+import { Timeline, Typography } from 'antd';
+import { timeIdFormat } from '../../utils/pipe/timeIdFormat.pipe';
 
 interface props {
-  data: IDetailConsultation | undefined
-  highestBeliefDiagnosis: diagnosisResult | undefined
+  data: IDetailConsultation | undefined;
+  highestBeliefDiagnosis: diagnosisResult | undefined;
 }
 
 const DiagnosisResult: React.FC<props> = ({
@@ -17,10 +17,10 @@ const DiagnosisResult: React.FC<props> = ({
   highestBeliefDiagnosis,
 }): JSX.Element => {
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4'>
       <Container>
-        <Typography.Title level={2}>Daftar Gejala</Typography.Title>
-        <Typography.Text type="secondary">
+        <Typography.Title level={2}>Daftar Gejala Pasien</Typography.Title>
+        <Typography.Text type='secondary'>
           Berikut daftar gejala yang dipilih pasien :
         </Typography.Text>
         <Timeline
@@ -32,67 +32,67 @@ const DiagnosisResult: React.FC<props> = ({
           }))}
         />
       </Container>
-      <div className="order-first lg:order-none">
+      <div className='order-first lg:order-none'>
         <Container>
           <Typography.Title level={2}>Informasi Pasien</Typography.Title>
-          <div className="mt-3 flex flex-col gap-y-3">
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">Nama: </Typography.Text>
-              <p className="font-semibold text-lg">{data?.user}</p>
+          <div className='mt-3 flex flex-col gap-y-3'>
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>Nama: </Typography.Text>
+              <p className='font-semibold text-lg'>{data?.user}</p>
             </div>
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">Email: </Typography.Text>
-              <p className="font-semibold text-lg">{data?.userEmail}</p>
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>Email: </Typography.Text>
+              <p className='font-semibold text-lg'>{data?.userEmail}</p>
             </div>
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">
-                Nomor Telepon:{" "}
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>
+                Nomor Telepon:{' '}
               </Typography.Text>
-              <p className="font-semibold text-lg">{data?.userPhoneNumber}</p>
+              <p className='font-semibold text-lg'>{data?.userPhoneNumber}</p>
             </div>
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">Alamat: </Typography.Text>
-              <p className="font-semibold text-lg">{data?.userAddress}</p>
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>Alamat: </Typography.Text>
+              <p className='font-semibold text-lg'>{data?.userAddress}</p>
             </div>
           </div>
         </Container>
       </div>
-      <div className="lg:col-span-2">
+      <div className='lg:col-span-2'>
         <Container>
           <Typography.Title level={2}>Hasil Diagnosa</Typography.Title>
-          <div className="mt-3 flex flex-col gap-y-3">
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">
+          <div className='mt-3 flex flex-col gap-y-3'>
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>
                 Tanggal Diagnosa:
               </Typography.Text>
-              <p className="font-semibold text-lg">
-                {data?.createdAt ? timeIdFormat(new Date(data.createdAt)) : "-"}
+              <p className='font-semibold text-lg'>
+                {data?.createdAt ? timeIdFormat(new Date(data.createdAt)) : '-'}
               </p>
             </div>
           </div>
-          <div className="mt-3 flex flex-col gap-y-3">
-            <div className="flex flex-col">
-              <Typography.Text type="secondary">
+          <div className='mt-3 flex flex-col gap-y-3'>
+            <div className='flex flex-col'>
+              <Typography.Text type='secondary'>
                 Persentase Diagnosa:
               </Typography.Text>
-              <p className="font-semibold text-lg">
+              <p className='font-semibold text-lg'>
                 {highestBeliefDiagnosis
                   ? `${(highestBeliefDiagnosis.belief_value * 100).toFixed(
                       0
                     )} % - ${highestBeliefDiagnosis.disorder
                       .map((d) => d.name)
-                      .join(", ")}`
-                  : "-"}
+                      .join(', ')}`
+                  : '-'}
               </p>
             </div>
-            <hr className="border-gray-200" />
-            <div className="flex flex-col">
+            <hr className='border-gray-200' />
+            <div className='flex flex-col'>
               <Typography.Title level={2}>Solusi:</Typography.Title>
-              <div className="flex flex-col gap-3">
+              <div className='flex flex-col gap-3'>
                 {data?.solution.map(
                   (solution: string, index: number): JSX.Element => (
-                    <div key={index} className="p-3 bg-quaternary rounded-lg">
-                      <p className="text-lg text-gray-900 font-semibold">
+                    <div key={index} className='p-3 bg-quaternary rounded-lg'>
+                      <p className='text-lg text-gray-900 font-semibold'>
                         {solution}
                       </p>
                     </div>
@@ -100,15 +100,15 @@ const DiagnosisResult: React.FC<props> = ({
                 )}
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className='flex flex-col'>
               <Typography.Title level={2}>Info Lebih Lengkap:</Typography.Title>
-              <div className="flex flex-col gap-3">
+              <div className='flex flex-col gap-3'>
                 <p>
-                  {" "}
-                  Anda bisa menghubungi psikolog{" "}
-                  <span className="font-bold">Azola Arcilia Fajuita</span> pada
-                  nomor{" "}
-                  <a href="https://wa.me/6281331454133" target="_blank">
+                  {' '}
+                  Anda bisa menghubungi psikolog{' '}
+                  <span className='font-bold'>Azola Arcilia Fajuita</span> pada
+                  nomor{' '}
+                  <a href='https://wa.me/6281331454133' target='_blank'>
                     +62-813-3145-4133
                   </a>
                 </p>
@@ -118,7 +118,7 @@ const DiagnosisResult: React.FC<props> = ({
         </Container>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DiagnosisResult
+export default DiagnosisResult;
