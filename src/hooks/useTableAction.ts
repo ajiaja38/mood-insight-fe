@@ -1,16 +1,18 @@
-import { useContext } from "react"
+import { useContext } from 'react';
 import {
   TableActionContext,
   type ITableActionContext,
-} from "../context/TableAction/TableActionContext"
+} from '../context/TableAction/TableActionContext';
 
 const useTableAction = () => {
-  const context: ITableActionContext | null = useContext(TableActionContext)
+  const context: ITableActionContext | null = useContext(TableActionContext);
 
   if (!context)
-    throw new Error("useTableAction must be used within a TableActionProvider")
+    throw new Error(
+      'useTableAction must be used within a Table Action Provider'
+    );
 
-  return context
-}
+  return context;
+};
 
-export default useTableAction
+export default useTableAction;
