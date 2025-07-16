@@ -1,31 +1,31 @@
-import React, { type JSX } from 'react';
-import UseTitle from '../../hooks/useTitle';
-import BreadCrumb from '../../components/Breadcumb';
-import { App, Button, Popconfirm, Tag, type TableProps } from 'antd';
+import React, { type JSX } from 'react'
+import UseTitle from '../../hooks/useTitle'
+import BreadCrumb from '../../components/Breadcumb'
+import { App, Button, Popconfirm, Tag, type TableProps } from 'antd'
 import {
   QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
-} from '@tanstack/react-query';
-import { UserService } from '../../service/user.service';
-import Container from '../../components/Content/Container';
-import type { IGetAllUser } from '../../types/interface/IUser.interface';
-import { EGender } from '../../types/enum/EGender.enum';
-import { ERole } from '../../types/enum/ERole.enum';
-import type { ResponseMessageEntity } from '../../types/interface/IResponse.interface';
-import ContainerTable from '../../components/Content/ContainerTable';
-import useTableAction from '../../hooks/useTableAction';
+} from '@tanstack/react-query'
+import { UserService } from '../../service/user.service'
+import Container from '../../components/Content/Container'
+import type { IGetAllUser } from '../../types/interface/IUser.interface'
+import { EGender } from '../../types/enum/EGender.enum'
+import { ERole } from '../../types/enum/ERole.enum'
+import type { ResponseMessageEntity } from '../../types/interface/IResponse.interface'
+import ContainerTable from '../../components/Content/ContainerTable'
+import useTableAction from '../../hooks/useTableAction'
 
 interface DataTypes extends IGetAllUser {
-  key: number;
+  key: number
 }
 
 const Users: React.FC = (): JSX.Element => {
-  const { deletedId, setDeletedId } = useTableAction();
+  const { deletedId, setDeletedId } = useTableAction()
 
-  const { notification } = App.useApp();
-  const queryClient: QueryClient = useQueryClient();
+  const { notification } = App.useApp()
+  const queryClient: QueryClient = useQueryClient()
 
   const { data, error } = useQuery({
     queryKey: ['users'],
@@ -34,40 +34,40 @@ const Users: React.FC = (): JSX.Element => {
       return data.data.map((user: IGetAllUser, index: number) => ({
         key: index + 1,
         ...user,
-      }));
+      }))
     },
-  });
+  })
 
   if (error)
     notification.error({
       message: 'Error',
       description: error.message,
-    });
+    })
 
   const { mutate: deleteUser } = useMutation({
     mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
-      setDeletedId(id);
-      const res: ResponseMessageEntity = await UserService.deleteUser(id);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      return res;
+      setDeletedId(id)
+      const res: ResponseMessageEntity = await UserService.deleteUser(id)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      return res
     },
     onSuccess: () => {
       notification.success({
         message: 'Success',
         description: 'Pengguna berhasil dihapus',
-      });
-      queryClient.invalidateQueries({ queryKey: ['users'] });
+      })
+      queryClient.invalidateQueries({ queryKey: ['users'] })
     },
     onError: (error) => {
       notification.error({
         message: 'Error',
         description: error.message,
-      });
+      })
     },
     onSettled: () => {
-      setDeletedId(null);
+      setDeletedId(null)
     },
-  });
+  })
 
   const columns: TableProps<DataTypes>['columns'] = [
     {
@@ -169,7 +169,7 @@ const Users: React.FC = (): JSX.Element => {
           </Popconfirm>
         ) : null,
     },
-  ];
+  ]
 
   return (
     <>
@@ -183,7 +183,7 @@ const Users: React.FC = (): JSX.Element => {
         />
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users
