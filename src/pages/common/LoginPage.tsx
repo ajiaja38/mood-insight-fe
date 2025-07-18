@@ -35,42 +35,42 @@ const LoginPage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <h1 className="font-bold text-center text-xl">Silahkan Masuk</h1>
+      <h1 className='font-bold text-center text-xl'>Silahkan Masuk</h1>
       <Form
-        name="basic"
-        layout="vertical"
+        name='basic'
+        layout='vertical'
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        autoComplete="off"
+        autoComplete='off'
       >
         <Form.Item<ILoginPayload>
-          label="Email"
-          name="email"
+          label='Email'
+          name='email'
           rules={[
-            { required: true, message: "Tolong masukkan email anda!" },
+            { required: true, message: "Tolong masukkan email anda" },
             { type: "email", message: "Email tidak valid!" },
           ]}
         >
-          <Input placeholder="Masukkan email anda" type="email" />
+          <Input placeholder='Masukkan email anda' type='email' />
         </Form.Item>
 
         <Form.Item<ILoginPayload>
-          label="Password"
-          name="password"
+          label='Password'
+          name='password'
           rules={[{ required: true, message: "Password wajib diisi!" }]}
         >
-          <Input.Password placeholder="Password" />
+          <Input.Password placeholder='Password' />
         </Form.Item>
 
         <Form.Item>
-          <div className="flex flex-col gap-y-3">
+          <div className='flex flex-col gap-y-3'>
             <p>
               Belum terdaftar?,
-              <NavLink to="/auth/register"> Daftar disini</NavLink>
+              <NavLink to='/auth/register'> Daftar disini</NavLink>
             </p>
             <Button
-              type="primary"
-              htmlType="submit"
+              type='primary'
+              htmlType='submit'
               style={{ width: "5rem", padding: "1.2rem" }}
               loading={loading}
             >
