@@ -2,7 +2,7 @@ import type { AxiosInstance } from "axios"
 import axios from "axios"
 
 export const api: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8000/v1",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -6,6 +6,12 @@ import tailwindcss from "@tailwindcss/vite"
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    allowedHosts: ["86drs00g-5173.asse.devtunnels.ms"],
+    proxy: {
+      "/api": {
+        target: "https://mood-insight-be.vercel.app/v1",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 })
