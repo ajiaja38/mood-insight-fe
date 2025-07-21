@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createHashRouter } from "react-router-dom"
 import LoginPage from "../pages/common/LoginPage"
 import LandingPage from "../pages/common"
 import RegisterPage from "../pages/common/RegisterPage"
@@ -24,68 +24,67 @@ import ProfilUser from "../pages/common/ProfilUser"
 import RoleGuard from "./guard/RoleGuard"
 import { ERole } from "../types/enum/ERole.enum"
 
-export const router: ReturnType<typeof createBrowserRouter> =
-  createBrowserRouter([
-    {
-      path: "/",
-      element: <UserLayout />,
-      children: [
-        { path: "", element: <LandingPage /> },
-        {
-          path: "",
-          element: <RouterGuard redirectPath="/" />,
-          children: [
-            { path: "konsultasi-pengguna", element: <ConsultationUser /> },
-            {
-              path: "detail-konsultasi/:id",
-              element: <DetailConsultationUser />,
-            },
-            { path: "riwayat", element: <HistoryConsultation /> },
-            { path: "profile-pengguna", element: <ProfilUser /> },
-          ],
-        },
-        { path: "*", element: <Dashboard404 /> },
-      ],
-    },
-    {
-      path: "/auth",
-      element: <AuthenticationLayout />,
-      children: [
-        { path: "login", element: <LoginPage /> },
-        { path: "register", element: <RegisterPage /> },
-        { path: "*", element: <Dashboard404 /> },
-      ],
-    },
-    {
-      path: "/dashboard",
-      element: <RouterGuard redirectPath="/auth/login" />,
-      children: [
-        {
-          path: "",
-          element: <RoleGuard role={ERole.ADMIN} redirectPath="/" />,
-          children: [
-            {
-              path: "",
-              element: <DashboardLayout />,
-              children: [
-                { path: "", element: <DashboardHome /> },
-                { path: "penyakit", element: <Disorder /> },
-                { path: "gejala", element: <Symptom /> },
-                { path: "konsultasi", element: <Consultation /> },
-                { path: "hasil-diagnosa", element: <DiagnosisResult /> },
-                {
-                  path: "hasil-diagnosa/:id",
-                  element: <DetailDiagnosisResult />,
-                },
-                { path: "solusi", element: <Solution /> },
-                { path: "knowledge-base", element: <KnowledgeBase /> },
-                { path: "users", element: <Users /> },
-                { path: "profile", element: <Profile /> },
-                { path: "*", element: <Dashboard404 /> },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ])
+export const router: ReturnType<typeof createHashRouter> = createHashRouter([
+  {
+    path: "/",
+    element: <UserLayout />,
+    children: [
+      { path: "", element: <LandingPage /> },
+      {
+        path: "",
+        element: <RouterGuard redirectPath='/' />,
+        children: [
+          { path: "konsultasi-pengguna", element: <ConsultationUser /> },
+          {
+            path: "detail-konsultasi/:id",
+            element: <DetailConsultationUser />,
+          },
+          { path: "riwayat", element: <HistoryConsultation /> },
+          { path: "profile-pengguna", element: <ProfilUser /> },
+        ],
+      },
+      { path: "*", element: <Dashboard404 /> },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthenticationLayout />,
+    children: [
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
+      { path: "*", element: <Dashboard404 /> },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <RouterGuard redirectPath='/auth/login' />,
+    children: [
+      {
+        path: "",
+        element: <RoleGuard role={ERole.ADMIN} redirectPath='/' />,
+        children: [
+          {
+            path: "",
+            element: <DashboardLayout />,
+            children: [
+              { path: "", element: <DashboardHome /> },
+              { path: "penyakit", element: <Disorder /> },
+              { path: "gejala", element: <Symptom /> },
+              { path: "konsultasi", element: <Consultation /> },
+              { path: "hasil-diagnosa", element: <DiagnosisResult /> },
+              {
+                path: "hasil-diagnosa/:id",
+                element: <DetailDiagnosisResult />,
+              },
+              { path: "solusi", element: <Solution /> },
+              { path: "knowledge-base", element: <KnowledgeBase /> },
+              { path: "users", element: <Users /> },
+              { path: "profile", element: <Profile /> },
+              { path: "*", element: <Dashboard404 /> },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+])
