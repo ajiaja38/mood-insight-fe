@@ -91,11 +91,11 @@ const Profile: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <UseTitle title="Profile" />
+      <UseTitle title='Profile' />
       <BreadCrumb items={[{ title: "Profile" }]} />
       <ProfileUser data={data} handleOpenMOdal={handleOpenMOdal} />
       <Modal
-        title="Update data pengguna"
+        title='Update data pengguna'
         open={openModal}
         confirmLoading={isPending}
         onOk={(): void => form.submit()}
@@ -104,36 +104,36 @@ const Profile: React.FC = (): JSX.Element => {
       >
         <Form
           form={form}
-          name="add-disorder"
-          layout="vertical"
+          name='add-disorder'
+          layout='vertical'
           onFinish={onSubmit}
         >
           <Form.Item<IUpdateUserPayload>
-            label="Nama Anda"
-            name="name"
+            label='Nama Anda'
+            name='name'
             rules={[{ required: true, message: "Harap masukkan nama anda!" }]}
           >
-            <Input placeholder="Masukkan nama anda" />
+            <Input placeholder='Masukkan nama anda' />
           </Form.Item>
 
           <Form.Item<IUpdateUserPayload>
-            label="Email"
-            name="email"
+            label='Email'
+            name='email'
             rules={[
               { required: true, message: "Harap masukkan email anda!" },
               { type: "email", message: "Email tidak valid!" },
             ]}
           >
-            <Input type="email" placeholder="Masukkan email" />
+            <Input type='email' placeholder='Masukkan email' />
           </Form.Item>
 
           <Form.Item<IUpdateUserPayload>
-            label="Nomor Telepon"
-            name="phoneNumber"
+            label='Nomor Telepon'
+            name='phoneNumber'
             rules={[
               {
                 required: true,
-                message: "Tolong masukkan nomor telepon anda!",
+                message: "Tolong masukkan nomor telepon anda",
               },
               {
                 pattern: /^\+62\d{9,13}$/,
@@ -142,15 +142,15 @@ const Profile: React.FC = (): JSX.Element => {
               },
             ]}
           >
-            <Input placeholder="Masukkan nomor telepon anda, contoh: +628123456789" />
+            <Input placeholder='Masukkan nomor telepon anda, contoh: +628123456789' />
           </Form.Item>
 
           <Form.Item<IUpdateUserPayload>
-            label="Alamat"
-            name="address"
+            label='Alamat'
+            name='address'
             rules={[{ required: true, message: "Harap masukkan alamat anda!" }]}
           >
-            <Input type="text" placeholder="Masukkan alamat" />
+            <Input type='text' placeholder='Masukkan alamat' />
           </Form.Item>
         </Form>
       </Modal>
