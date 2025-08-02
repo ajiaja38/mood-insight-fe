@@ -62,7 +62,7 @@ const Profile: React.FC = (): JSX.Element => {
       setOpenModal(false)
       notification.success({
         message: "Success",
-        description: "Berhasil ubah data profile",
+        description: "Berhasil ubah data profile pengguna",
       })
       queryClient.invalidateQueries({ queryKey: ["profile"] })
       form.resetFields()
