@@ -111,7 +111,7 @@ const Profile: React.FC = (): JSX.Element => {
           <Form.Item<IUpdateUserPayload>
             label='Nama Anda'
             name='name'
-            rules={[{ required: true, message: "Harap masukkan nama anda!" }]}
+            rules={[{ required: true, message: "Tolong masukkan nama anda!" }]}
           >
             <Input placeholder='Masukkan nama anda' />
           </Form.Item>
