@@ -61,26 +61,26 @@ const ConsultationUser: React.FC = (): JSX.Element => {
   }, [])
 
   return (
-    <div className="bg-gray-100 content-padding">
-      <UseTitle title="Konsultasi Pengguna" />
-      <div className="container mx-auto">
+    <div className='bg-gray-100 content-padding'>
+      <UseTitle title='Konsultasi Pengguna' />
+      <div className='container mx-auto'>
         <Container>
-          <div className="flex flex-col gap-y-1">
-            <h1 className="font-bold text-3xl">Konsultasi Depresi</h1>
-            <p className="text-gray-500">
+          <div className='flex flex-col gap-y-1'>
+            <h1 className='font-bold text-3xl'>Konsultasi Depresi Pengguna</h1>
+            <p className='text-gray-500'>
               Silahkan pilih gejala yang dialami :
             </p>
           </div>
           <Divider />
-          <div className="mb-5">
+          <div className='mb-5'>
             <Checkbox.Group onChange={onChange}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {data?.length
                   ? data.map(
                       (symptom: IGetSymptom): JSX.Element => (
                         <div
                           key={symptom.id}
-                          className="p-3 border border-gray-300 bg-gray-50 hover:shadow-md transition-all ease-in-out duration-150 rounded-lg"
+                          className='p-3 border border-gray-300 bg-gray-50 hover:shadow-md transition-all ease-in-out duration-150 rounded-lg'
                         >
                           <Checkbox value={symptom.id}>
                             {symptom.symptom}
@@ -93,8 +93,8 @@ const ConsultationUser: React.FC = (): JSX.Element => {
             </Checkbox.Group>
           </div>
           <Button
-            type="primary"
-            size="large"
+            type='primary'
+            size='large'
             loading={isPending}
             onClick={(): void => {
               if (!symptomIds.length)
