@@ -67,7 +67,9 @@ const ConsultationUser: React.FC = (): JSX.Element => {
         <Container>
           <div className='flex flex-col gap-y-1'>
             <h1 className='font-bold text-3xl'>Konsultasi Depresi</h1>
-            <p className='text-gray-500'>Silahkan pilih gejala yang dialami</p>
+            <p className='text-gray-500'>
+              Silahkan pilih gejala yang dialami :
+            </p>
           </div>
           <Divider />
           <div className='mb-5'>
