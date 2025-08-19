@@ -62,7 +62,7 @@ const ConsultationUser: React.FC = (): JSX.Element => {
 
   return (
     <div className='bg-gray-100 content-padding'>
-      <UseTitle title='Konsultasi Pengguna' />
+      <UseTitle title='Konsultasi User' />
       <div className='container mx-auto'>
         <Container>
           <div className='flex flex-col gap-y-1'>
