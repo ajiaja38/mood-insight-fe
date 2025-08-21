@@ -68,7 +68,7 @@ const ConsultationUser: React.FC = (): JSX.Element => {
           <div className='flex flex-col gap-y-1'>
             <h1 className='font-bold text-3xl'>Konsultasi Depresi</h1>
             <p className='text-gray-500'>
-              Silahkan pilih gejala yang dialami :
+              Silahkan pilih gejala yang pasien dialami :
             </p>
           </div>
           <Divider />
