@@ -59,7 +59,7 @@ const Consultation: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <UseTitle title='Cek Depresi' />
+      <UseTitle title='Cek Depresi Pengguna' />
       <BreadCrumb items={[{ title: "Konsultasi" }, { title: "Cek Depresi" }]} />
       <Container>
         <div className='flex flex-col gap-y-1'>
