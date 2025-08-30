@@ -95,7 +95,7 @@ const Disorder: React.FC = (): JSX.Element => {
     onSuccess: (): void => {
       notification.success({
         message: "Success",
-        description: "Berhasil menambahkan penyakit",
+        description: "Berhasil menambahkan data penyakit",
       })
       setOpenModal(false)
       queryClient.invalidateQueries({ queryKey: ["disorders"] })
@@ -165,7 +165,7 @@ const Disorder: React.FC = (): JSX.Element => {
         dataIndex: "description",
         key: "description",
         render: (_, { description }): JSX.Element => (
-          <p className="text-justify">{description}</p>
+          <p className='text-justify'>{description}</p>
         ),
         editable: true,
       },
@@ -174,16 +174,16 @@ const Disorder: React.FC = (): JSX.Element => {
         key: "action",
         render: (_, record: IGetDisorder): JSX.Element => (
           <Popconfirm
-            title="Hapus Data Penyakit?"
+            title='Hapus Data Penyakit?'
             description={`Hapus data penyakit ${record.name}?`}
             onConfirm={(): void => deleteDisorder(record.id)}
-            okText="Hapus"
-            cancelText="Batal"
+            okText='Hapus'
+            cancelText='Batal'
             okButtonProps={{ danger: true }}
           >
             <Button
-              color="red"
-              variant="solid"
+              color='red'
+              variant='solid'
               loading={deletedId === record.id}
             >
               {deletedId === record.id ? null : "Hapus"}
@@ -211,11 +211,11 @@ const Disorder: React.FC = (): JSX.Element => {
   return (
     <>
       {isUpdatePending && <LoadingOverlay />}
-      <UseTitle title="Penyakit" />
+      <UseTitle title='Penyakit' />
       <BreadCrumb items={[{ title: "Penyakit" }]} />
       <Container>
         <ContainerTable
-          title="Data Penyakit"
+          title='Data Penyakit'
           data={data}
           columns={columns}
           isAdd={true}
@@ -223,7 +223,7 @@ const Disorder: React.FC = (): JSX.Element => {
         />
       </Container>
       <Modal
-        title="Tambah Data Penyakit"
+        title='Tambah Data Penyakit'
         open={openModal}
         confirmLoading={isPending}
         onOk={(): void => form.submit()}
@@ -232,30 +232,30 @@ const Disorder: React.FC = (): JSX.Element => {
       >
         <Form
           form={form}
-          name="add-disorder"
-          layout="vertical"
+          name='add-disorder'
+          layout='vertical'
           onFinish={onSubmit}
           initialValues={{ remember: true }}
         >
           <Form.Item<ICreateDisorder>
-            label="Nama Penyakit"
-            name="name"
+            label='Nama Penyakit'
+            name='name'
             rules={[
               { required: true, message: "Harap masukkan nama penyakit!" },
             ]}
           >
-            <Input placeholder="Masukkan nama penyakit" />
+            <Input placeholder='Masukkan nama penyakit' />
           </Form.Item>
 
           <Form.Item<ICreateDisorder>
-            label="Deskripsi"
-            name="description"
+            label='Deskripsi'
+            name='description'
             rules={[
               { required: true, message: "Harap masukkan deskripsi penyakit!" },
             ]}
           >
             <Input.TextArea
-              placeholder="Masukkan deskripsi penyakit"
+              placeholder='Masukkan deskripsi penyakit'
               rows={4}
             />
           </Form.Item>
