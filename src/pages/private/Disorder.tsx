@@ -241,7 +241,7 @@ const Disorder: React.FC = (): JSX.Element => {
             label='Nama Penyakit'
             name='name'
             rules={[
-              { required: true, message: "Harap masukkan nama data penyakit!" },
+              { required: true, message: "Harap masukkan nama data penyakit" },
             ]}
           >
             <Input placeholder='Masukkan nama penyakit' />
