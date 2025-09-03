@@ -174,7 +174,7 @@ const Disorder: React.FC = (): JSX.Element => {
         key: "action",
         render: (_, record: IGetDisorder): JSX.Element => (
           <Popconfirm
-            title='Hapus Data Penyakit ini?'
+            title='Hapus Data Penyakit?'
             description={`Hapus data penyakit ${record.name}?`}
             onConfirm={(): void => deleteDisorder(record.id)}
             okText='Hapus'
