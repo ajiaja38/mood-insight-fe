@@ -214,14 +214,14 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       key: "action",
       render: (_, record: IGetKnowledgeBase): JSX.Element => (
         <Popconfirm
-          title="Hapus data Basis Pengetahuan?"
+          title='Hapus data Basis Pengetahuan?'
           description={`Hapus data Basis Pengetahuan ${record.id}?`}
           onConfirm={(): void => deleteKnowledgeBase(record.id)}
-          okText="Hapus"
-          cancelText="Batal"
+          okText='Hapus'
+          cancelText='Batal'
           okButtonProps={{ danger: true }}
         >
-          <Button color="red" variant="solid" loading={deletedId === record.id}>
+          <Button color='red' variant='solid' loading={deletedId === record.id}>
             {deletedId === record.id ? null : "Hapus"}
           </Button>
         </Popconfirm>
@@ -247,18 +247,18 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
   return (
     <>
       {isUpdatePending && <LoadingOverlay />}
-      <UseTitle title="Basis Pengetahuan" />
+      <UseTitle title='Basis Pengetahuan' />
       <BreadCrumb items={[{ title: "Basis Pengetahuan" }]} />
       <Container>
         <ContainerTable
-          title="Data Basis Pengetahuan"
+          title='Data Basis Pengetahuan'
           data={data}
           columns={columns}
           isAdd={true}
           callback={handleOpenModal}
         />
         <div>
-          <p className="font-bold">
+          <p className='font-bold'>
             Data Basis Pengetahuan di buat oleh psikolog:
           </p>
           <p>Nama: Azola Arcilia Fajuita</p>
@@ -266,7 +266,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
         </div>
       </Container>
       <Modal
-        title="Tambah Data Basis Pengetahuan"
+        title='Tambah Data Basis Pengetahuan'
         open={openModal}
         confirmLoading={isPending}
         onOk={(): void => form.submit()}
@@ -275,14 +275,14 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       >
         <Form
           form={form}
-          name="add-knowledge-base"
-          layout="vertical"
+          name='add-knowledge-base'
+          layout='vertical'
           onFinish={onSubmit}
           initialValues={{ remember: true }}
         >
           <Form.Item<ICreateKnowledgeBase>
-            label="Data Penyakit"
-            name="disorderId"
+            label='Data Penyakit'
+            name='disorderId'
             rules={[
               {
                 required: true,
@@ -290,7 +290,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
               },
             ]}
           >
-            <Select placeholder="Pilih data penyakit">
+            <Select placeholder='Pilih data penyakit'>
               {disorders?.length
                 ? disorders.map(
                     (
@@ -306,8 +306,8 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
             </Select>
           </Form.Item>
           <Form.Item<ICreateKnowledgeBase>
-            label="Data Gejala"
-            name="symptomId"
+            label='Data Gejala'
+            name='symptomId'
             rules={[
               {
                 required: true,
@@ -316,7 +316,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
             ]}
           >
             <Select
-              placeholder="Pilih data gejala"
+              placeholder='Pilih data gejala'
               getPopupContainer={(triggerNode) => triggerNode.parentNode}
               virtual={false}
             >
@@ -332,8 +332,8 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
             </Select>
           </Form.Item>
           <Form.Item<ICreateKnowledgeBase>
-            label="Bobot"
-            name="weight"
+            label='Bobot'
+            name='weight'
             rules={[
               {
                 required: true,
@@ -342,7 +342,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
             ]}
           >
             <Select
-              placeholder="Pilih bobot Basis Pengetahuan"
+              placeholder='Pilih bobot Basis Pengetahuan'
               getPopupContainer={(triggerNode) => triggerNode.parentNode}
               virtual={false}
             >
