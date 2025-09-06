@@ -163,7 +163,7 @@ const KnowledgeBase: React.FC = (): JSX.Element => {
       onSuccess: (): void => {
         notification.success({
           message: "Success",
-          description: "Berhasil memperbarui Basis Pengetahuan",
+          description: "Berhasil memperbarui knowledge base",
         })
         setOpenModal(false)
         queryClient.invalidateQueries({ queryKey: ["knowledgeBase"] })
