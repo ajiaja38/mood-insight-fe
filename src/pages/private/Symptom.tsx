@@ -47,12 +47,11 @@ const Symptom: React.FC = (): JSX.Element => {
       ),
   })
 
-  if (error) {
+  if (error)
     notification.error({
       message: "Error",
       description: error.message,
     })
-  }
 
   const { mutate: deleteSymptom } = useMutation({
     mutationFn: async (id: string): Promise<ResponseMessageEntity> => {
@@ -80,7 +79,7 @@ const Symptom: React.FC = (): JSX.Element => {
     },
   })
 
-  const handleOpenModal = () => setOpenModal(true)
+  const handleOpenModal: () => void = (): void => setOpenModal(true)
 
   const { mutate: createSymptom, isPending } = useMutation({
     mutationKey: ["createSymptom"],
@@ -111,9 +110,9 @@ const Symptom: React.FC = (): JSX.Element => {
     },
   })
 
-  const onSubmit: FormProps<ICreateSymptom>["onFinish"] = (values) => {
-    createSymptom(values)
-  }
+  const onSubmit: FormProps<ICreateSymptom>["onFinish"] = (
+    values: ICreateSymptom
+  ) => createSymptom(values)
 
   const { mutate: updateSymptom, isPending: isUpdatePending } = useMutation({
     mutationKey: ["updateSymptom"],
@@ -141,7 +140,8 @@ const Symptom: React.FC = (): JSX.Element => {
     onSettled: () => setDeletedId(null),
   })
 
-  const handleSave = (row: IGetSymptom) => updateSymptom(row)
+  const handleSave: (row: IGetSymptom) => void = (row: IGetSymptom) =>
+    updateSymptom(row)
 
   const defaultColumns: (ColumnType<IGetSymptom> & { editable?: boolean })[] = [
     {
@@ -165,14 +165,14 @@ const Symptom: React.FC = (): JSX.Element => {
       key: "action",
       render: (_, record: IGetSymptom) => (
         <Popconfirm
-          title="Hapus Data Gejala?"
+          title='Hapus Data Gejala?'
           description={`Hapus data gejala ${record.id}?`}
           onConfirm={() => deleteSymptom(record.id)}
-          okText="Hapus"
-          cancelText="Batal"
+          okText='Hapus'
+          cancelText='Batal'
           okButtonProps={{ danger: true }}
         >
-          <Button color="red" variant="solid" loading={deletedId === record.id}>
+          <Button color='red' variant='solid' loading={deletedId === record.id}>
             {deletedId === record.id ? null : "Hapus"}
           </Button>
         </Popconfirm>
@@ -198,11 +198,11 @@ const Symptom: React.FC = (): JSX.Element => {
   return (
     <>
       {isUpdatePending && <LoadingOverlay />}
-      <UseTitle title="Gejala" />
+      <UseTitle title='Gejala' />
       <BreadCrumb items={[{ title: "Gejala" }]} />
       <Container>
         <ContainerTable
-          title="Data Gejala"
+          title='Data Gejala'
           data={data}
           columns={columns}
           isAdd={true}
@@ -210,7 +210,7 @@ const Symptom: React.FC = (): JSX.Element => {
         />
       </Container>
       <Modal
-        title="Tambah Data Gejala"
+        title='Tambah Data Gejala'
         open={openModal}
         confirmLoading={isPending}
         onOk={() => form.submit()}
@@ -219,17 +219,22 @@ const Symptom: React.FC = (): JSX.Element => {
       >
         <Form
           form={form}
-          name="add-disorder"
-          layout="vertical"
+          name='add-disorder'
+          layout='vertical'
           onFinish={onSubmit}
           initialValues={{ remember: true }}
         >
           <Form.Item<ICreateSymptom>
-            label="Nama Gejala"
-            name="symptom"
-            rules={[{ required: true, message: "Harap masukkan nama gejala!" }]}
+            label='Nama Gejala'
+            name='symptom'
+            rules={[
+              {
+                required: true,
+                message: "Harap masukkan nama gejala depresi!",
+              },
+            ]}
           >
-            <Input placeholder="Masukkan nama gejala" />
+            <Input placeholder='Masukkan nama gejala' />
           </Form.Item>
         </Form>
       </Modal>
