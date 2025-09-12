@@ -66,7 +66,7 @@ const LoginPage: React.FC = (): JSX.Element => {
           <div className='flex flex-col gap-y-3'>
             <p>
               Belum terdaftar?,
-              <NavLink to='/auth/register'> Daftar disini</NavLink>
+              <NavLink to='/auth/register'> Ayo Daftar disini</NavLink>
             </p>
             <Button
               type='primary'
