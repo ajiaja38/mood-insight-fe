@@ -19,7 +19,7 @@ const CallToAction: React.FC = (): JSX.Element => {
         </h1>
         <p className="text-base lg:text-2xl text-gray-400">
           Tidak ada kata terlalu dini atau terlambat untuk mencari bantuan,
-          Kecerdasan sistem kami siap memandu Anda di setiap langkah.
+          Kecerdasan sistem kami siap memandu Anda di setiap langkahnya.
         </p>
       </div>
       <div className="flex justify-center items-center">
