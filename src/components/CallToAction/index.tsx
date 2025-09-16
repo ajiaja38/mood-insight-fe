@@ -12,21 +12,21 @@ const CallToAction: React.FC = (): JSX.Element => {
   const navigate: NavigateFunction = useNavigate()
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 container mx-auto py-28 p-4 lg:px-9 3xl:px-0">
-      <div className="flex flex-col gap-y-5">
-        <h1 className="text-3xl lg:text-5xl font-extrabold lg:mb-2.5">
-          Mulailah Penyembuhan Mental Anda Sekarang!
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-5 container mx-auto py-28 p-4 lg:px-9 3xl:px-0'>
+      <div className='flex flex-col gap-y-5'>
+        <h1 className='text-3xl lg:text-5xl font-extrabold lg:mb-2.5'>
+          Mulailah Penyembuhan Mental Anda Sekarang Juga!
         </h1>
-        <p className="text-base lg:text-2xl text-gray-400">
+        <p className='text-base lg:text-2xl text-gray-400'>
           Tidak ada kata terlalu dini atau terlambat untuk mencari bantuan,
           Kecerdasan sistem kami siap memandu Anda di setiap langkahnya.
         </p>
       </div>
-      <div className="flex justify-center items-center">
+      <div className='flex justify-center items-center'>
         <Button
-          variant="solid"
-          color="primary"
-          size="large"
+          variant='solid'
+          color='primary'
+          size='large'
           style={{
             fontSize: "1.5rem",
             padding: "1.5rem",
